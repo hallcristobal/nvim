@@ -34,9 +34,16 @@ vim.keymap.set("n", "<leader>f", function() -- vim.lsp.buf.format)
 	require("conform").format({ async = true, lsp_fallback = true })
 end)
 
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+-- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+-- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- buffer manipulation
+vim.keymap.set("n", "b[", "<cmd>bp<CR>")
+vim.keymap.set("n", "b]", "<cmd>bn<CR>")
+vim.keymap.set("n", "<leader>bcu", function()
+	require("BufOnly").BufOnly()
+end)

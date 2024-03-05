@@ -65,4 +65,13 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("windwp/nvim-ts-autotag")
+	use("folke/tokyonight.nvim")
+	use({
+		"nvim-tree/nvim-tree.lua",
+		requires = {
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
+	})
+	use({ "akinsho/bufferline.nvim", tag = "*", requires = "nvim-tree/nvim-web-devicons" })
+	use({ "numtostr/BufOnly.nvim" })
 end)
