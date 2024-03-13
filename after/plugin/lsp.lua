@@ -31,20 +31,23 @@ lsp_zero.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>d", function()
         vim.diagnostic.open_float()
     end, opts)
-    vim.keymap.set("n", "[d", function()
+    vim.keymap.set("n", "]d", function()
         vim.diagnostic.goto_next()
     end, opts)
-    vim.keymap.set("n", "]d", function()
+    vim.keymap.set("n", "[d", function()
         vim.diagnostic.goto_prev()
     end, opts)
+    vim.keymap.set("v", "<leader>ca", function()
+        require("cosmic-ui").range_code_actions()
+    end, opts)
     vim.keymap.set("n", "<leader>ca", function()
-        vim.lsp.buf.code_action()
+        require("cosmic-ui").code_actions()
     end, opts)
     vim.keymap.set("n", "<leader>vrr", function()
-        vim.lsp.buf.references()
+        require('telescope.builtin').lsp_references()
     end, opts)
     vim.keymap.set("n", "<leader>vrn", function()
-        vim.lsp.buf.rename()
+        require("cosmic-ui").rename()
     end, opts)
     vim.keymap.set("i", "<C-h>", function()
         vim.lsp.buf.signature_help()
@@ -57,7 +60,7 @@ lsp_zero.on_attach(function(client, bufnr)
     if client.server_capabilities.document_highlight then
         vim.api.nvim_exec([[
       hi LspReferenceRead  gui=none	guibg=#393649
-      hi LspReferenceText  gui=none	guibg=#393649
+      hi LspReferenceText  [gui=none	guibg=#393649
       hi LspReferenceWrite gui=none	guibg=#393649
       augroup lsp_document_highlight
         autocmd!

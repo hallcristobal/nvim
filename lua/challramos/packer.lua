@@ -78,4 +78,8 @@ return require("packer").startup(function(use)
     use({ "lukas-reineke/indent-blankline.nvim" })
     use({ "SergioRibera/cmp-dotenv" })
     use({ "rmagatti/goto-preview" })
+    use({
+        'CosmicNvim/cosmic-ui',
+        requires = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' }
+    })
 end)
