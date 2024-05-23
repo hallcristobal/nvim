@@ -48,3 +48,9 @@ vim.keymap.set("n", "<C-x>", "<cmd>bdelete<CR>")
 vim.keymap.set("n", "<leader>bcu", function()
     require("BufOnly").BufOnly()
 end)
+
+-- tmux-nav
+vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>")
+vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>")
+vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>")
+vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>")

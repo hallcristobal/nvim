@@ -21,6 +21,7 @@ return require("packer").startup(function(use)
         "Mofiqul/vscode.nvim",
         as = "vscode-color",
     })
+    use({ "catppuccin/nvim", as = "catppuccin" })
     use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
     use("mbbill/undotree")
     use("tpope/vim-fugitive")
@@ -81,5 +82,9 @@ return require("packer").startup(function(use)
     use({
         'CosmicNvim/cosmic-ui',
         requires = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' }
+    })
+    use({
+        'christoomey/vim-tmux-navigator',
+        lazy = false,
     })
 end)
