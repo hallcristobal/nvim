@@ -1,6 +1,6 @@
 return {
     -- Packer can manage itself
-    'wbthomason/packer.nvim',
+    -- 'wbthomason/packer.nvim',
 
     {
         'nvim-telescope/telescope.nvim',
