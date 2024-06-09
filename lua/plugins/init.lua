@@ -61,12 +61,12 @@ return {
     },
     'windwp/nvim-ts-autotag',
     'folke/tokyonight.nvim',
-    {
-        'nvim-tree/nvim-tree.lua',
-        dependencies = {
-            'nvim-tree/nvim-web-devicons', -- optional
-        },
-    },
+    -- {
+    --     'nvim-tree/nvim-tree.lua',
+    --     dependencies = {
+    --         'nvim-tree/nvim-web-devicons', -- optional
+    --     },
+    -- },
     { 'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
     { 'numtostr/BufOnly.nvim' },
     { 'lukas-reineke/indent-blankline.nvim' },
