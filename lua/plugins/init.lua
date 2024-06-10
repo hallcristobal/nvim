@@ -68,7 +68,7 @@ return {
     --         'nvim-tree/nvim-web-devicons', -- optional
     --     },
     -- },
-    { 'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
+    -- { 'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
     { 'numtostr/BufOnly.nvim' },
     { 'lukas-reineke/indent-blankline.nvim' },
     { 'SergioRibera/cmp-dotenv' },

@@ -8,7 +8,7 @@ end
 
 require("vscode").setup({
     style = "dark",
-    transparent = true,
+    -- transparent = true,
     italic_comments = true,
     underline_links = true,
     color_overrides = {
@@ -22,7 +22,7 @@ require("catppuccin").setup({
         light = "latte",
         dark = "mocha",
     },
-    transparent_background = true, -- disables setting the background color.
+    -- transparent_background = true, -- disables setting the background color.
     show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
     term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
     dim_inactive = {
@@ -70,7 +70,7 @@ require("tokyonight").setup({
     -- or leave it empty to use the default settings
     style = "moon",      -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
     light_style = "day", -- The theme is used when the background is set to light
-    transparent = true, -- Enable this to disable setting the background color
+    -- transparent = true, -- Enable this to disable setting the background color
     terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
     styles = {
         -- Style to be applied to different syntax groups
@@ -80,8 +80,8 @@ require("tokyonight").setup({
         functions = { italic = true },
         variables = {},
         -- Background styles. Can be "dark", "transparent" or "normal"
-        sidebars = "transparent", -- style for sidebars, see below
-        floats = "transparent", -- style for floating windows
+        sidebars = "normal", -- style for sidebars, see below
+        floats = "normal", -- style for floating windows
     },
     sidebars = { "qf", "help" },  -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
     day_brightness = 0.3,         -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors

@@ -53,9 +53,6 @@ lsp_zero.on_attach(function(client, bufnr)
 		vim.lsp.buf.signature_help()
 	end, opts)
 	vim.keymap.set("i", "<c-s>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts) -- apparently is needed to have persistent signajure_help
-	vim.keymap.set("n", "<leader>vb", function()
-		require("telescope.builtin").buffers()
-	end, opts)
 
 	-- Set autocommands conditional on server_capabilities
 	-- Light highlight color: #b2dbe7
