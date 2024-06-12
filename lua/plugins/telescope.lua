@@ -61,12 +61,14 @@ local config = function()
       file_ignore_patterns = build_ignores(),
     })
   end, {})
+
   -- Search for files in cwd w/ ignore
   vim.keymap.set('n', '<leader>pf', function()
     builtin.find_files({
       file_ignore_patterns = build_ignores()
     })
   end, {})
+
   -- Search for files in cwd w/o ignore
   vim.keymap.set('n', '<leader>Pf', function()
     builtin.find_files({
@@ -93,6 +95,23 @@ local config = function()
       file_ignore_patterns = build_ignores(),
     })
   end)
+
+  -- View references
+  vim.keymap.set("n", "<leader>vrr", function()
+    builtin.lsp_references({
+      file_ignore_patterns = build_ignores(),
+      initial_mode = "normal"
+    })
+  end)
+
+  -- View Definitions
+  vim.keymap.set("n", "<leader>gd", function()
+    builtin.lsp_definitions({
+      file_ignore_patterns = build_ignores(),
+      initial_mode = "normal"
+    })
+  end)
+
   -- View Buffers
   vim.keymap.set("n", "<leader>vb", function()
     builtin.buffers({
