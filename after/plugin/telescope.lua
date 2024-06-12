@@ -1,9 +1,16 @@
 local builtin = require('telescope.builtin')
+local actions = require('telescope.actions')
 
 
 require("telescope").setup({
   defaults = {
-    initial_mode = "normal"
+    initial_mode = "normal",
+    layout_strategy = "vertical",
+    mappings = {
+      n = {
+        ['<C-d>'] = actions.delete_buffer
+      }
+    }
   }
 })
 
@@ -42,6 +49,7 @@ local function build_ignores()
       "license/",
       "node_modules/",
       "scripts/",
+      "test/",
       "testing/",
     }
     return ConcatArray(file_ignore_patterns, ra_ignore_patterns)
@@ -54,7 +62,7 @@ vim.keymap.set('n', '<leader>pa', function()
   builtin.find_files({
     initial_mode = "insert",
     search_dirs = { "src/" },
-    file_ignore_patterns = build_ignores()
+    file_ignore_patterns = build_ignores(),
   })
 end, {})
 -- Search for files in cwd w/ ignore
@@ -86,6 +94,7 @@ vim.keymap.set('n', '<leader>ps', function()
     initial_mode = "insert"
   })
 end)
+
 -- Grep search w/o ignore
 vim.keymap.set('n', '<leader>Ps', function()
   builtin.live_grep({
@@ -95,6 +104,6 @@ vim.keymap.set('n', '<leader>Ps', function()
 end)
 
 -- vim.keymap.set('n', '<leader>ps', function()
-  -- --     builtin.grep_string({ search = vim.fn.input("Grep > ") })
-  -- -- end)
-  --
+-- --     builtin.grep_string({ search = vim.fn.input("Grep > ") })
+-- -- end)
+--
