@@ -71,8 +71,7 @@ local config = function()
 
   -- Search for files in cwd w/o ignore
   vim.keymap.set('n', '<leader>Pf', function()
-    builtin.find_files({
-    })
+    builtin.find_files()
   end, {})
 
   -- Search for git files w/ ignore
