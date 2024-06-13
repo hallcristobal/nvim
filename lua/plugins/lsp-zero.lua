@@ -101,6 +101,18 @@ local config = function()
 
 	require("luasnip.loaders.from_vscode").lazy_load()
 	require("lsp_signature").setup({})
+	require("nvim-ts-autotag").setup({
+		opts = {
+			enable_close = true, 
+			enable_rename = true, 
+			enable_close_on_slash = false, 
+		},
+		per_filetype = {
+			["html"] = {
+				enable_close = false,
+			},
+		},
+	})
 end
 
 return {
@@ -121,6 +133,7 @@ return {
 			"ray-x/lsp_signature.nvim",
 			event = "VeryLazy",
 		},
+		"windwp/nvim-ts-autotag",
 	},
 	config = config,
 }
