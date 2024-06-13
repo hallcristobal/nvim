@@ -110,13 +110,26 @@ require("lspconfig").pylsp.setup({
 	},
 })
 
-local cmp = require("cmp")
-cmp.setup({
-	sources = {
-		{ name = "dotenv" },
-	},
+local capabilities = vim.tbl_deep_extend(
+	"force",
+	{},
+	vim.lsp.protocol.make_client_capabilities(),
+	require("cmp_nvim_lsp").default_capabilities()
+)
+
+require("lspconfig").clangd.setup({
+	cmd = {
+		"clangd",
+		"--background-index",
+		"--suggest-missing-includes",
+		"--all-scopes-completion",
+		"--completion-style=detailed",
+		"--compile-commands-dir=",
+		"--function-arg-placeholders=0",
+	}, -- custom build dir
+
+	capabilities = capabilities,
 })
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 -- this is the function that loads the extra snippets to luasnip
 -- from rafamadriz/friendly-snippets
@@ -162,6 +175,9 @@ require("lsp_signature").setup({
 	move_cursor_key = nil, -- imap, use nvim_set_current_win to move cursor between current win and floating
 })
 
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({
 	sources = {
 		{ name = "path" },
@@ -178,6 +194,32 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 	}),
 })
+
+vim.keymap.set({ "i" }, "<C-K>", function()
+	luasnip.expand()
+end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-L>", function()
+	luasnip.jump(1)
+end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-J>", function()
+	luasnip.jump(-1)
+end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<C-E>", function()
+	if luasnip.choice_active() then
+		luasnip.change_choice(1)
+	end
+end, { silent = true })
+
+-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+--   if cmp.visible() then
+--     cmp.select_prev_item()
+--   elseif luasnip.locally_jumpable(-1) then
+--     luasnip.jump(-1)
+--   else
+--     fallback()
+--   end
+-- end, { "i", "s" }),
 
 -- vim.lsp.handlers['textDocument/hover'] = function(_, method, result)
 --     vim.lsp.util.focusable_float(method, function()
