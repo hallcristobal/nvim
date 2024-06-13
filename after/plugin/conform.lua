@@ -41,8 +41,20 @@ require("conform").setup({
         graphql = { { "prettierd", "prettier" } },
         html = { { "prettierd", "prettier" } },
         json = { { "prettierd", "prettier" } },
-        javascript = { { "standardjs", "prettierd", "prettier" } },
-        javascriptreact = { { "prettierd", "prettier" } },
+        javascript = function(bufnr)
+            if require("conform").get_formatter_info("standardjs", bufnr).available then
+                return { "standardjs" }
+            else
+                return { { "prettierd", "prettier", "standardjs" } }
+            end
+        end,
+        javascriptreact = function(bufnr)
+            if require("conform").get_formatter_info("standardjs", bufnr).available then
+                return { "standardjs" }
+            else
+                return { { "prettierd", "prettier", "standardjs" } }
+            end
+        end,
         less = { { "prettierd", "prettier" } },
         markdown = { { "prettierd", "prettier" } },
         scss = { { "prettierd", "prettier" } },
