@@ -19,9 +19,9 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 -- Delete without yanking
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 -- Yank to system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["*y]])
 -- Yank line to system clipboard
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("n", "<leader>Y", [["*Y]])
 
 -- Shortcut search & replace word under cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
