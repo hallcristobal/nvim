@@ -23,14 +23,14 @@ return {
         enable = true,
         additional_vim_regex_highlighting = false,
       },
-      autotag = {
-        enable = true,
-        virtual_text = {
-          spacing = 5,
-          severity_limit = "Warning",
-        },
-        update_in_insert = true,
-      },
+      -- autotag = {
+      --   enable = true,
+      --   virtual_text = {
+      --     spacing = 5,
+      --     severity_limit = "Warning",
+      --   },
+      --   update_in_insert = true,
+      -- },
     })
   end
 }
