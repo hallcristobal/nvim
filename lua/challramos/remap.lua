@@ -35,3 +35,8 @@ vim.keymap.set("n", "<CR>", "<Down>")
 
 -- Prevent issues....
 vim.keymap.set("n", "Q", "<nop>")
+
+vim.keymap.set("n", "]q", "<cmd>cn<CR>")
+vim.keymap.set("n", "[q", "<cmd>cp<CR>")
+vim.keymap.set("n", "<leader>Q", "<cmd>.cc<CR>")
+vim.keymap.set("n", "<leader>cqq", "<cmd>call setqflist([])<CR>")

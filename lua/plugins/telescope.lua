@@ -37,6 +37,44 @@ local function build_ignores()
       "testing/",
     }
     return ConcatArray(file_ignore_patterns, ra_ignore_patterns)
+  elseif cwd == "flex-app" then
+    local ra_ignore_patterns = {
+      "assets/",
+      "bolt/",
+      "coverage/",
+      "cypress/",
+      "dist/",
+      "docs/",
+      "i18n/",
+      "infra/",
+      "license/",
+      "node_modules/",
+      "scripts/",
+      "test/",
+      "testing/",
+      "ci/",
+      "bin",
+    }
+    return ConcatArray(file_ignore_patterns, ra_ignore_patterns)
+  elseif cwd == "thor-setup-app" then
+    local ra_ignore_patterns = {
+      "assets/",
+      "bolt/",
+      "coverage/",
+      "cypress/",
+      "dist/",
+      "docs/",
+      "i18n/",
+      "infra/",
+      "license/",
+      "node_modules/",
+      "scripts/",
+      "test/",
+      "testing/",
+      "ci/",
+      "bin",
+    }
+    return ConcatArray(file_ignore_patterns, ra_ignore_patterns)
   end
   return file_ignore_patterns
 end
