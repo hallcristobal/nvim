@@ -56,8 +56,33 @@ local config = function()
     require("cmp_nvim_lsp").default_capabilities()
   )
 
+  local servers = {
+    ts_ls = {
+      javascript = {
+        format = false,
+      },
+      typescript = {
+      }
+    }
+  }
+
+  local opts = {
+    capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  }
   require("mason").setup({})
-  require("mason-lspconfig").setup({
+  local mason_lspconfig = require("mason-lspconfig")
+  mason_lspconfig.setup_handlers({
+    function(server_name)
+      lspconfig[server_name].setup({
+        on_attach = opts.on_attach,
+        capabilities = opts.capabilities,
+        settings = servers[server_name],
+        filetypes = (servers[server_name] or {}).filetypes
+      })
+    end
+  })
+
+  mason_lspconfig.setup({
     handlers = {
       lsp_zero.default_setup,
       lua_ls = function()
