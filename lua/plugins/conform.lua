@@ -1,44 +1,48 @@
 local config = function()
   local conform = require('conform')
+  local prettier_opt = { "prettierd", "prettier", stop_after_first = true }
 
   local standardJsOrDefault = function(bufnr)
     local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-    -- if cwd == "platco-resident-app" then
-    --   return { lsp_format = "prefer" }
-    -- end
+
+    if cwd == "platco_resident_app" then
+      return { prefer_lsp = true, stop_after_first = true }
+    end
 
     if vim.fn.filereadable(cwd .. "/.eslintrc.js") == 1 then
-      return { "eslint" }
+      return { "eslint", stop_after_first = true }
     elseif conform.get_formatter_info("standardjs", bufnr).available then
-      return { "standardjs" }
+      return { "standardjs", stop_after_first = true }
     else
-      return { "prettierd", "prettier" }
+      return { "prettierd", "prettier", stop_after_first = true }
     end
   end
+
 
   conform.setup({
     formatters_by_ft = {
       lua = { "stylua" },
-      angular = { "prettierd", "prettier", stop_after_first = true },
-      css = { "prettierd", "prettier", stop_after_first = true },
-      flow = { "prettierd", "prettier", stop_after_first = true },
-      graphql = { "prettierd", "prettier", stop_after_first = true },
-      html = { "prettierd", "prettier", stop_after_first = true },
       json = { "jq", "prettierd", "prettier", stop_after_first = true },
-      javascript = standardJsOrDefault,
-      javascriptreact = {},
-      less = { "prettierd", "prettier", stop_after_first = true },
-      markdown = { "prettierd", "prettier", stop_after_first = true },
-      scss = { "prettierd", "prettier", stop_after_first = true },
-      typescript = { "prettierd", "prettier", stop_after_first = true },
-      typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-      vue = { "prettierd", "prettier", stop_after_first = true },
-      yaml = { "prettierd", "prettier", stop_after_first = true },
       bash = { "beautysh" },
       prisma = { "prisma" },
-      python = { "black" }
+      python = { "black" },
+
+      javascript = standardJsOrDefault,
+      javascriptreact = standardJsOrDefault,
+
+      angular = prettier_opt,
+      css = prettier_opt,
+      flow = prettier_opt,
+      graphql = prettier_opt,
+      html = prettier_opt,
+      less = prettier_opt,
+      markdown = prettier_opt,
+      scss = prettier_opt,
+      typescript = prettier_opt,
+      typescriptreact = prettier_opt,
+      vue = prettier_opt,
+      yaml = prettier_opt,
     },
-    log_level = vim.log.levels.INFO,
     notify_on_error = true,
   })
 
@@ -49,23 +53,6 @@ local config = function()
       filter = function(client) return client.name ~= "ts_ls" end
     })
   end)
-
-  vim.api.nvim_create_user_command("FormatDisable", function(args)
-    if args.bang then
-      vim.b.disable_autoformat = true
-    else
-      vim.g.disable_autoformat = true
-    end
-  end, {
-    desc = "Disable autoformat-on-save",
-    bang = true,
-  })
-  vim.api.nvim_create_user_command("FormatEnable", function()
-    vim.b.disable_autoformat = false
-    vim.g.disable_autoformat = false
-  end, {
-    desc = "Re-enable autoformat-on-save",
-  })
 end
 
 return {

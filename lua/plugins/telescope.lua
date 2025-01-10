@@ -18,6 +18,7 @@ local function build_ignores()
     "build/",
     "target/",
     "package%-lock%.json",
+    "yarn.lock",
   }
 
   if cwd == "platco-resident-app" then
@@ -109,7 +110,9 @@ local config = function()
 
   -- Search for files in cwd w/o ignore
   vim.keymap.set('n', '<leader>Pf', function()
-    builtin.find_files()
+    builtin.find_files({
+      file_ignore_patterns = {}
+    })
   end, {})
 
   -- Search for git files w/ ignore
@@ -159,7 +162,7 @@ end
 
 return {
   'nvim-telescope/telescope.nvim',
-  tag = '0.1.6',
+  tag = '0.1.8',
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = config
 }
