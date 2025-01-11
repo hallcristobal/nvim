@@ -1,7 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  config = function ()
+  config = function()
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
         "c",
@@ -32,5 +32,5 @@ return {
       --   update_in_insert = true,
       -- },
     })
-  end
+  end,
 }

@@ -1,0 +1,45 @@
+return {
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup({})
+    end,
+  },
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+    config = function()
+      vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>")
+      vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>")
+      vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>")
+      vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>")
+    end,
+  },
+  {
+    "mbbill/undotree",
+    config = function()
+      vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+      vim.o.undofile = true
+    end,
+  },
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+    end,
+  },
+  "alvan/vim-closetag",
+  {
+    "folke/tokyonight.nvim",
+    config = function()
+      require("tokyonight").setup({
+        transparent = true,
+        styles = {
+          sidebars = "transparent",
+          floats = "transparent",
+        },
+      })
+    end,
+  },
+}

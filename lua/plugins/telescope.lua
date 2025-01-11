@@ -85,15 +85,15 @@ local config = function()
       layout_strategy = "vertical",
       mappings = {
         n = {
-          ['<C-d>'] = require("telescope.actions").delete_buffer
-        }
-      }
-    }
+          ["<C-d>"] = require("telescope.actions").delete_buffer,
+        },
+      },
+    },
   })
   local builtin = require("telescope.builtin")
 
   -- Search for files only in "src/"
-  vim.keymap.set('n', '<leader>pa', function()
+  vim.keymap.set("n", "<leader>pa", function()
     builtin.find_files({
       search_dirs = { "src/" },
       file_ignore_patterns = build_ignores(),
@@ -101,33 +101,33 @@ local config = function()
   end, {})
 
   -- Search for files in cwd w/ ignore
-  vim.keymap.set('n', '<leader>pf', function()
+  vim.keymap.set("n", "<leader>pf", function()
     builtin.find_files({
-      file_ignore_patterns = build_ignores()
+      file_ignore_patterns = build_ignores(),
     })
   end, {})
 
   -- Search for files in cwd w/o ignore
-  vim.keymap.set('n', '<leader>Pf', function()
+  vim.keymap.set("n", "<leader>Pf", function()
     builtin.find_files()
   end, {})
 
   -- Search for git files w/ ignore
-  vim.keymap.set('n', '<C-p>', function()
+  vim.keymap.set("n", "<C-p>", function()
     builtin.git_files({
-      file_ignore_patterns = build_ignores()
+      file_ignore_patterns = build_ignores(),
     })
   end, {})
 
   -- Grep search w/ ignore
-  vim.keymap.set('n', '<leader>ps', function()
+  vim.keymap.set("n", "<leader>ps", function()
     builtin.live_grep({
       file_ignore_patterns = build_ignores(),
     })
   end)
 
   -- Grep search w/o ignore
-  vim.keymap.set('n', '<leader>Ps', function()
+  vim.keymap.set("n", "<leader>Ps", function()
     builtin.live_grep({
       file_ignore_patterns = build_ignores(),
     })
@@ -137,7 +137,7 @@ local config = function()
   vim.keymap.set("n", "<leader>vrr", function()
     builtin.lsp_references({
       file_ignore_patterns = build_ignores(),
-      initial_mode = "normal"
+      initial_mode = "normal",
     })
   end)
 
@@ -145,21 +145,21 @@ local config = function()
   vim.keymap.set("n", "<leader>gd", function()
     builtin.lsp_definitions({
       file_ignore_patterns = build_ignores(),
-      initial_mode = "normal"
+      initial_mode = "normal",
     })
   end)
 
   -- View Buffers
   vim.keymap.set("n", "<leader>vb", function()
     builtin.buffers({
-      initial_mode = "normal"
+      initial_mode = "normal",
     })
   end)
 end
 
 return {
-  'nvim-telescope/telescope.nvim',
-  tag = '0.1.6',
-  dependencies = { 'nvim-lua/plenary.nvim' },
-  config = config
+  "nvim-telescope/telescope.nvim",
+  tag = "0.1.6",
+  dependencies = { "nvim-lua/plenary.nvim" },
+  config = config,
 }

@@ -7,7 +7,7 @@ local config = function()
       { name = "nvim_lsp" },
       { name = "nvim_lua" },
       { name = "luasnip", keyword_length = 2 },
-      { name = "buffer",  keyword_length = 3 },
+      { name = "buffer", keyword_length = 3 },
     },
     mapping = cmp.mapping.preset.insert({
       ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
@@ -19,6 +19,6 @@ local config = function()
 end
 
 return {
-  'hrsh7th/nvim-cmp',
+  "hrsh7th/nvim-cmp",
   config = config,
 }

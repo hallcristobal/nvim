@@ -1,39 +1,50 @@
 local config = function()
-  local conform = require('conform')
+  local conform = require("conform")
 
   local standardJsOrDefault = function(bufnr)
     if conform.get_formatter_info("standardjs", bufnr).available then
       return { "standardjs" }
     else
-      return { { "prettierd", "prettier", "standardjs" } }
+      return { "prettierd", "prettier", "standardjs" }
     end
   end
 
   conform.setup({
     formatters_by_ft = {
       lua = { "stylua" },
-      angular = { { "prettierd", "prettier" } },
-      css = { { "prettierd", "prettier" } },
-      flow = { { "prettierd", "prettier" } },
-      graphql = { { "prettierd", "prettier" } },
-      html = { { "prettierd", "prettier" } },
-      json = { { "jq", "prettierd", "prettier" } },
+      angular = { "prettierd", "prettier" },
+      css = { "prettierd", "prettier" },
+      flow = { "prettierd", "prettier" },
+      graphql = { "prettierd", "prettier" },
+      html = { "prettierd", "prettier" },
+      json = { "jq", "prettierd", "prettier" },
       javascript = standardJsOrDefault,
       javascriptreact = standardJsOrDefault,
-      less = { { "prettierd", "prettier" } },
-      markdown = { { "prettierd", "prettier" } },
-      scss = { { "prettierd", "prettier" } },
-      typescript = { { "prettierd", "prettier" } },
-      typescriptreact = { { "prettierd", "prettier" } },
-      vue = { { "prettierd", "prettier" } },
-      yaml = { { "prettierd", "prettier" } },
+      less = { "prettierd", "prettier" },
+      markdown = { "prettierd", "prettier" },
+      scss = { "prettierd", "prettier" },
+      typescript = { "prettierd", "prettier" },
+      typescriptreact = { "prettierd", "prettier" },
+      vue = { "prettierd", "prettier" },
+      yaml = { "yamlfmt", "prettierd", "prettier" },
       bash = { "beautysh" },
       prisma = { "prisma" },
-      python = { "black" }
+      python = { "black" },
     },
-    log_level = vim.log.levels.WARN,
+    log_level = vim.log.levels.TRACE,
     notify_on_error = true,
   })
+
+  conform.formatters.stylua = {
+    prepend_args = {
+      "--indent-type",
+      "Spaces",
+      "--indent-width",
+      "2",
+      "--call-parentheses",
+      "Always",
+    },
+  }
 
   vim.keymap.set("n", "<leader>f", function()
     conform.format({ async = true, lsp_fallback = true })
@@ -58,6 +69,6 @@ local config = function()
 end
 
 return {
-  'stevearc/conform.nvim',
-  config = config
+  "stevearc/conform.nvim",
+  config = config,
 }

@@ -1,5 +1,5 @@
 return {
-  'lukas-reineke/indent-blankline.nvim',
+  "lukas-reineke/indent-blankline.nvim",
   config = function()
     -- create the highlight groups in the highlight setup hook, so they are reset
     -- every time the colorscheme changes
@@ -24,8 +24,8 @@ return {
           "RainbowGreen",
           "RainbowViolet",
           "RainbowCyan",
-        }
-      }
+        },
+      },
     })
-  end
+  end,
 }
