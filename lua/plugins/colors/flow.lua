@@ -2,16 +2,27 @@ return {
   "0xstepit/flow.nvim",
   lazy = false,
   priority = 1000,
-  opts = {},
-  config = function()
-    require("flow").setup {
-      dark_theme = true,          -- Set the theme with dark background.
-      high_contrast = false,      -- Make the dark background darker or the light background lighter.
-      transparent = true,         -- Set transparent background.
-      fluo_color = "pink",        -- Color used as fluo. Available values are pink, yellow, orange, or green.
-      mode = "base",              -- Mode of the colors. Available values are: dark, bright, desaturate, or base.
-      aggressive_spell = false,   -- Use colors for spell check.
-    }
-    -- vim.cmd("colorscheme flow")
-  end
+  opts = {
+    theme = {
+      style = "dark",         --  "dark" | "light"
+      contrast = "high",   -- "default" | "high"
+      transparent = true,    -- true | false
+    },
+    colors = {
+      mode = "light",    -- "default" | "dark" | "light"
+      fluo = "pink",       -- "pink" | "cyan" | "yellow" | "orange" | "green"
+      custom = {
+        saturation = "",   -- "" | string representing an integer between 0 and 100
+        light = "",        -- "" | string representing an integer between 0 and 100
+      },
+    },
+    ui = {
+      borders = "inverse",        -- "theme" | "inverse" | "fluo" | "none"
+      aggressive_spell = false,   -- true | false
+    },
+  },
+  config = function(_, opts)
+    require("flow").setup(opts)
+    vim.cmd("colorscheme flow")
+  end,
 }

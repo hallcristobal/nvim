@@ -1,3 +1,6 @@
+local dart_config = require("plugins.lsp_configs.dart").dart_config
+
+--- default on_attach
 function on_attach(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
@@ -83,23 +86,6 @@ return {
     require("mason").setup()
     require("mason-lspconfig").setup({ handlers = handlers })
     -- This can't be in the handlers above, because Mason doesn't know dartls exists
-    require("lspconfig").dartls.setup({
-      cmd = { "dart", "language-server", "--protocol=lsp" },
-      filetypes = { "dart" },
-      init_options = {
-        closingLabels = true,
-        flutterOutline = true,
-        onlyAnalyzeProjectsWithOpenFiles = true,
-        ouline = true,
-        suggestFromUnimportedLibraries = true,
-      },
-      settings = {
-        dart = {
-          completeFunctionCalls = true,
-          showTodos = true,
-        },
-      },
-      on_attach = on_attach,
-    })
+    require("lspconfig").dartls.setup(dart_config(on_attach))
   end
 }
