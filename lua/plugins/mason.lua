@@ -9,6 +9,15 @@ local handlers = {
       on_attach = on_attach,
     })
   end,
+  ["cssls"] = function ()
+    --Enable (broadcasting) snippet capability for completion
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    require("lspconfig").cssls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+  end,
   ["ts_ls"] = function()
     require("lspconfig").ts_ls.setup({
       settings = {
