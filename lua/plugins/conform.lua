@@ -5,7 +5,7 @@ local config = function()
   local standardJsOrDefault = function(bufnr)
     local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 
-    if cwd == "platco_resident_app" then
+    if cwd == "platco_resident_app"  then
       return { prefer_lsp = true, stop_after_first = true }
     end
 
@@ -16,6 +16,15 @@ local config = function()
     else
       return { "prettierd", "prettier", stop_after_first = true }
     end
+  end
+  local tsOrDefault = function()
+    local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+
+    if cwd == "miracast-app" then
+      return { "prettierd", stop_after_first = true }
+    end
+
+    return prettier_opt
   end
 
 
@@ -38,8 +47,8 @@ local config = function()
       less = prettier_opt,
       markdown = prettier_opt,
       scss = prettier_opt,
-      typescript = prettier_opt,
-      typescriptreact = prettier_opt,
+      typescript = tsOrDefault,
+      typescriptreact = tsOrDefault,
       vue = prettier_opt,
       yaml = prettier_opt,
     },

@@ -40,3 +40,6 @@ vim.keymap.set("n", "]q", "<cmd>cn<CR>")
 vim.keymap.set("n", "[q", "<cmd>cp<CR>")
 vim.keymap.set("n", "<leader>Q", "<cmd>.cc<CR>")
 vim.keymap.set("n", "<leader>cqq", "<cmd>call setqflist([])<CR>")
+
+vim.keymap.set("n", "<leader>.", "<cmd>tabnext<CR>")
+vim.keymap.set("n", "<leader>,", "<cmd>tabprev<CR>")

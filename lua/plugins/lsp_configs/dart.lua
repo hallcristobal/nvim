@@ -1,70 +1,15 @@
+local utils = require('plugins.utils.utils')
 local M = {}
 --- Flutter stuff
-local nvim_eleven = vim.fn.has 'nvim-0.11' == 1
-local validate = vim.validate
-local function tbl_flatten(t)
-  --- @diagnostic disable-next-line:deprecated
-  return nvim_eleven and vim.iter(t):flatten(math.huge):totable() or vim.tbl_flatten(t)
-end
-
--- For zipfile: or tarfile: virtual paths, returns the path to the archive.
--- Other paths are returned unaltered.
-local function strip_archive_subpath(path)
-  -- Matches regex from zip.vim / tar.vim
-  path = vim.fn.substitute(path, 'zipfile://\\(.\\{-}\\)::[^\\\\].*$', '\\1', '')
-  path = vim.fn.substitute(path, 'tarfile:\\(.\\{-}\\)::.*$', '\\1', '')
-  return path
-end
-local function search_ancestors(startpath, func)
-  if nvim_eleven then
-    validate('func', func, 'function')
-  end
-  if func(startpath) then
-    return startpath
-  end
-  local guard = 100
-  for path in vim.fs.parents(startpath) do
-    -- Prevent infinite recursion if our algorithm breaks
-    guard = guard - 1
-    if guard == 0 then
-      return
-    end
-
-    if func(path) then
-      return path
-    end
-  end
-end
-
-local function escape_wildcards(path)
-  return path:gsub('([%[%]%?%*])', '\\%1')
-end
-
-local function root_pattern(...)
-  local patterns = tbl_flatten { ... }
-  return function(startpath)
-    startpath = strip_archive_subpath(startpath)
-    for _, pattern in ipairs(patterns) do
-      local match = search_ancestors(startpath, function(path)
-        for _, p in ipairs(vim.fn.glob(table.concat({ escape_wildcards(path), pattern }, '/'), true, true)) do
-          if vim.loop.fs_stat(p) then
-            return path
-          end
-        end
-      end)
-
-      if match ~= nil then
-        return match
-      end
-    end
-  end
+function M.on_attach(client, bufnr)
+  local opts = { buffer = bufnr, remap = false }
 end
 
 function M.dart_config(on_attach)
   return {
     cmd = { "dart", "language-server", "--protocol=lsp" },
     filetypes = { "dart" },
-    root_dir = root_pattern 'pubspec.yaml',
+    root_dir = utils.root_pattern 'pubspec.yaml',
     init_options = {
       --- When set to true, workspace folders will be ignored and analysis will be performed based on the open files, as if no
       --- workspace was open at all. This allows opening large folders without causing them to be completely analyzed.
@@ -148,7 +93,10 @@ function M.dart_config(on_attach)
         -- includeDependenciesInWorkspaceSymbols
       },
     },
-    on_attach = on_attach,
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      M.on_attach(client, bufnr)
+    end,
   }
 end
 

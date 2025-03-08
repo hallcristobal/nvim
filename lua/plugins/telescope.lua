@@ -1,3 +1,4 @@
+local utils = require ("plugins.utils.utils")
 local function ConcatArray(a, b)
   local result = { unpack(a) }
   table.move(b, 1, #b, #result + 1, result)
@@ -20,6 +21,37 @@ local function build_ignores()
     "package%-lock%.json",
     "yarn.lock",
   }
+
+  -- We're probably in a Dart/Flutter project
+  if utils.is_in_tree("pubspec.yaml") then
+    local ignore_patterns = {
+      ".dart_tool/",
+      ".git/",
+      ".idea/",
+      "android/",
+      -- "assets/",
+      -- "bin/",
+      "build/",
+      "ios/",
+      -- "lib/",
+      "linux/",
+      "macos/",
+      "web/",
+      "windows/",
+      ".flutter-plugins",
+      ".flutter-plugins-dependencies",
+      ".gitignore",
+      ".metadata",
+      "README.md",
+      "__Flutter_Output__",
+      "analysis_options.yaml",
+      "devtools_options.yaml",
+      "flutter_card_test.iml",
+      "pubspec.lock",
+      "pubspec.yaml",
+    }
+    return ConcatArray(file_ignore_patterns, ignore_patterns)
+  end
 
   if cwd == "platco-resident-app" then
     local ra_ignore_patterns = {
@@ -77,6 +109,7 @@ local function build_ignores()
     }
     return ConcatArray(file_ignore_patterns, ra_ignore_patterns)
   end
+
   return file_ignore_patterns
 end
 
@@ -157,6 +190,10 @@ local config = function()
     builtin.buffers({
       initial_mode = "normal"
     })
+  end)
+
+  vim.keymap.set("n", "<leader>fr", function()
+    require('telescope').extensions.flutter.commands()
   end)
 end
 
