@@ -1,6 +1,6 @@
 local dart_config = require("plugins.lsp_configs.dart").dart_config
-local on_attach = require('plugins.lsp_configs.attach').on_attach
-
+local ts_ls_setup = require("plugins.lsp_configs.ts_ls").setup
+local on_attach = require("plugins.lsp_configs.attach").on_attach
 
 local handlers = {
   function(server_name)
@@ -71,7 +71,22 @@ local handlers = {
       capabilities = capabilities,
       on_attach = on_attach,
     })
-  end
+  end,
+	["clangd"] = function()
+		require("lspconfig").clangd.setup({
+			cmd = {
+				"clangd",
+				"--background-index",
+				"--suggest-missing-includes",
+				"--all-scopes-completion",
+				"--completion-style=detailed",
+				"--compile-commands-dir=",
+				"--function-arg-placeholders=0",
+				"--enable-config",
+			}, -- custom build dir
+      on_attach = on_attach
+		})
+	end,
 }
 
 return {
