@@ -20,6 +20,9 @@ local config = function()
   local tsOrDefault = function()
     local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 
+    if cwd == "mediaplayer-solid" then
+      return { "prettier", stop_after_first = true }
+    end
     if cwd == "miracast-app" then
       return { "prettierd", stop_after_first = true }
     end

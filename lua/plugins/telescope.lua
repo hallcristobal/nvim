@@ -1,4 +1,5 @@
-local utils = require ("plugins.utils.utils")
+local ignores = require("plugins.telescope.ignores")
+local utils = require("plugins.utils.utils")
 local function ConcatArray(a, b)
   local result = { unpack(a) }
   table.move(b, 1, #b, #result + 1, result)
@@ -8,109 +9,16 @@ end
 local function build_ignores()
   local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 
-  local file_ignore_patterns = {
-    "yarn%.lock",
-    "node_modules/",
-    "raycast/",
-    "dist/",
-    "%.next",
-    "%.git/",
-    "%.gitlab/",
-    "build/",
-    "target/",
-    "package%-lock%.json",
-    "yarn.lock",
-  }
-
   -- We're probably in a Dart/Flutter project
   if utils.is_in_tree("pubspec.yaml") then
-    local ignore_patterns = {
-      ".dart_tool/",
-      ".git/",
-      ".idea/",
-      "android/",
-      -- "assets/",
-      -- "bin/",
-      "build/",
-      "ios/",
-      -- "lib/",
-      "linux/",
-      "macos/",
-      "web/",
-      "windows/",
-      ".flutter-plugins",
-      ".flutter-plugins-dependencies",
-      ".gitignore",
-      ".metadata",
-      "README.md",
-      "__Flutter_Output__",
-      "analysis_options.yaml",
-      "devtools_options.yaml",
-      "flutter_card_test.iml",
-      "pubspec.lock",
-      "pubspec.yaml",
-    }
-    return ConcatArray(file_ignore_patterns, ignore_patterns)
+    return ConcatArray(ignores["default"], ignores["dart"])
   end
 
-  if cwd == "platco-resident-app" then
-    local ra_ignore_patterns = {
-      "assets/",
-      "bolt/",
-      "coverage/",
-      "cypress/",
-      "dist/",
-      "docs/",
-      "i18n/",
-      "infra/",
-      "license/",
-      "node_modules/",
-      "scripts/",
-      "test/",
-      "testing/",
-    }
-    return ConcatArray(file_ignore_patterns, ra_ignore_patterns)
-  elseif cwd == "flex-app" then
-    local ra_ignore_patterns = {
-      "assets/",
-      "bolt/",
-      "coverage/",
-      "cypress/",
-      "dist/",
-      "docs/",
-      "i18n/",
-      "infra/",
-      "license/",
-      "node_modules/",
-      "scripts/",
-      "test/",
-      "testing/",
-      "ci/",
-      "bin",
-    }
-    return ConcatArray(file_ignore_patterns, ra_ignore_patterns)
-  elseif cwd == "thor-setup-app" then
-    local ra_ignore_patterns = {
-      "assets/",
-      "bolt/",
-      "coverage/",
-      "cypress/",
-      "dist/",
-      "docs/",
-      "i18n/",
-      "infra/",
-      "license/",
-      "node_modules/",
-      "scripts/",
-      "test/",
-      "testing/",
-      "ci/",
-      "bin",
-    }
-    return ConcatArray(file_ignore_patterns, ra_ignore_patterns)
+  if utils.is_in_tree("pom.xml") then
+    return ConcatArray(ignores["default"], ignores["java"])
   end
 
-  return file_ignore_patterns
+  return ConcatArray(ignores["default"], ignores[cwd])
 end
 
 local config = function()

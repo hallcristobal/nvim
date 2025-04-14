@@ -1,11 +1,16 @@
-
 local dart_config = require("plugins.lsp_configs.dart").dart_config
 local on_attach = require('plugins.lsp_configs.attach').on_attach
 
 
 local handlers = {
   function(server_name)
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+    }
     require("lspconfig")[server_name].setup({
+      capabilities = capabilities,
       on_attach = on_attach,
     })
   end,
@@ -19,6 +24,11 @@ local handlers = {
     })
   end,
   ["ts_ls"] = function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+    }
     require("lspconfig").ts_ls.setup({
       settings = {
         javascript = {
@@ -46,9 +56,22 @@ local handlers = {
           },
         },
       },
+      capabilities = capabilities,
       on_attach = on_attach,
     })
   end,
+  ["jdtls"] = function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local config = {
+      cmd = { vim.fn.expand('~/.local/share/nvim/mason/bin/jdtls') },
+      root_dir = vim.fs.dirname(vim.fs.find({ 'pom.xml', 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+    }
+    require('jdtls').start_or_attach(config)
+    require("lspconfig").jdtls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+  end
 }
 
 return {
@@ -56,6 +79,7 @@ return {
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
+    "mfussenegger/nvim-jdtls",
   },
   config = function()
     require("mason").setup()
