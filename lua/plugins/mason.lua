@@ -60,18 +60,6 @@ local handlers = {
       on_attach = on_attach,
     })
   end,
-  ["jdtls"] = function()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    local config = {
-      cmd = { vim.fn.expand('~/.local/share/nvim/mason/bin/jdtls') },
-      root_dir = vim.fs.dirname(vim.fs.find({ 'pom.xml', 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
-    }
-    require('jdtls').start_or_attach(config)
-    require("lspconfig").jdtls.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-  end,
 	["clangd"] = function()
 		require("lspconfig").clangd.setup({
 			cmd = {
