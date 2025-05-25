@@ -64,6 +64,7 @@ local config = function()
     formatters_by_ft = {
       lua = { "stylua" },
       json = { "jq", "prettierd", "prettier", stop_after_first = true },
+      jsonc = { "prettierd", stop_after_first = true },
       bash = { "beautysh" },
       prisma = { "prisma" },
       python = { "black" },

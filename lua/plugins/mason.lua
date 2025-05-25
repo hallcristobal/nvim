@@ -84,6 +84,7 @@ local function setup_handlers()
     capabilities = capabilities,
     on_attach = on_attach
   })
+
   vim.lsp.config("rust_analyzer", {
     settings = {
       ['rust-analyzer'] = rust_settings,
