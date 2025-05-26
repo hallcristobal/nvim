@@ -66,6 +66,12 @@ local M = {
 
   },
   ["dart"] = {
+    "coverage/",
+    "test/",
+    "test_fixes/",
+    "test_private/",
+    "test_profile/",
+    "test_release/",
     ".dart_tool/",
     ".git/",
     ".idea/",

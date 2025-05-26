@@ -45,7 +45,7 @@ function M.dart_config(on_attach)
       dart = {
         --- An array of paths (absolute or relative to each workspace folder) that should be excluded from analysis.
         --- (List<String>?)
-        -- analysisExcludedFolders
+        analysisExcludedFolders = {},
 
         --- When set to false, prevents registration (or unregisters) the SDK formatter. When set to true or not supplied, will
         --- register/reregister the SDK formatter.
