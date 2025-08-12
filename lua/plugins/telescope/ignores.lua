@@ -22,6 +22,19 @@ local xre_ignore = {
   ".DS_Store"
 }
 local M = {
+  ["graph-types-cypher"] = {
+    "ci",
+    "docker-compose.yml",
+    "Dockerfile",
+    "lib",
+    "Makefile",
+    "node_modules",
+    "package-lock.json",
+    "package.json",
+    "README.md",
+    "relationships",
+    "test",
+  },
   ["default"] = {
     "yarn%.lock",
     "node_modules/",

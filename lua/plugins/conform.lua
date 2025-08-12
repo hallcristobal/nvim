@@ -1,3 +1,23 @@
+local sdt_repos = {
+  "farside-api",
+  "graph-firehaus",
+  "graph-parser",
+  "graph-store",
+  "graph-types-cypher",
+  "merlins-magical-sending",
+  "nearside",
+}
+
+local function has_value(tab, val)
+  for index, value in ipairs(tab) do
+    if value == val then
+      return true
+    end
+  end
+
+  return false
+end
+
 local config = function()
   local conform = require('conform')
   local prettier_opt = { "prettierd", "prettier", stop_after_first = true }
@@ -5,7 +25,11 @@ local config = function()
   local standardJsOrDefault = function(bufnr)
     local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 
-    if cwd == "platco_resident_app"  then
+    if has_value(sdt_repos, cwd) then
+      return { prefer_lsp = true, stop_after_first = true }
+    end
+
+    if cwd == "platco_resident_app" then
       return { prefer_lsp = true, stop_after_first = true }
     end
 
@@ -17,6 +41,7 @@ local config = function()
       return { "prettierd", "prettier", stop_after_first = true }
     end
   end
+
   local tsOrDefault = function()
     local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 
@@ -25,6 +50,10 @@ local config = function()
     end
     if cwd == "miracast-app" then
       return { "prettierd", stop_after_first = true }
+    end
+
+    if has_value(sdt_repos, cwd) then
+      return { prefer_lsp = true, stop_after_first = true }
     end
 
     return prettier_opt

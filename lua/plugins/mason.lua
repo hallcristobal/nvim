@@ -14,7 +14,23 @@ local handlers = {
       on_attach = on_attach,
     })
   end,
-  ["cssls"] = function ()
+  ["eslint"] = function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+    }
+    require("lspconfig").eslint.setup({
+      on_attach = function(client, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          command = "EslintFixAll",
+        })
+        on_attach(client, bufnr)
+      end,
+    })
+  end,
+  ["cssls"] = function()
     --Enable (broadcasting) snippet capability for completion
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -60,21 +76,42 @@ local handlers = {
       on_attach = on_attach,
     })
   end,
-	["clangd"] = function()
-		require("lspconfig").clangd.setup({
-			cmd = {
-				"clangd",
-				"--background-index",
-				"--suggest-missing-includes",
-				"--all-scopes-completion",
-				"--completion-style=detailed",
-				"--compile-commands-dir=",
-				"--function-arg-placeholders=0",
-				"--enable-config",
-			}, -- custom build dir
+  ["clangd"] = function()
+    require("lspconfig").clangd.setup({
+      cmd = {
+        "clangd",
+        "--background-index",
+        "--suggest-missing-includes",
+        "--all-scopes-completion",
+        "--completion-style=detailed",
+        "--compile-commands-dir=",
+        "--function-arg-placeholders=0",
+        "--enable-config",
+      }, -- custom build dir
       on_attach = on_attach
-		})
-	end,
+    })
+  end,
+  ["pylsp"] = function()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+    }
+    require 'lspconfig'.pylsp.setup {
+      settings = {
+        pylsp = {
+          plugins = {
+            pycodestyle = {
+              ignore = { 'E501', 'E231', 'E302' },
+              maxLineLength = 100
+            }
+          }
+        }
+      },
+      capabilities = capabilities,
+      on_attach = on_attach
+    }
+  end,
 }
 
 return {

@@ -1,5 +1,7 @@
 -- Open netrw Explorer
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>")
+vim.keymap.set({"n", "v", "s"}, "<C-f>", "<cmd>NvimTreeToggle<CR>")
 -- Shortcut for pasting from " register in insert mode
 vim.keymap.set("i", "<C-v>", [[<C-R>"]])
 
@@ -27,7 +29,7 @@ vim.keymap.set("n", "<leader>Y", [["*Y]])
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "<C-n>", "<cmd>bp<CR>")
-vim.keymap.set("n", "<C-m>", "<cmd>bn<CR>")
+vim.keymap.set("n", "<C-m>", "<cmd>bnext<CR>")
 vim.keymap.set("n", "<C-x>", "<cmd>bd<CR>")
 
 -- this is so frustrating....
@@ -35,6 +37,8 @@ vim.keymap.set("n", "<CR>", "<Down>")
 
 -- Prevent issues....
 vim.keymap.set("n", "Q", "<nop>")
+-- Close go back to normal mode when pressing Escape in terminal
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 
 vim.keymap.set("n", "]q", "<cmd>cn<CR>")
 vim.keymap.set("n", "[q", "<cmd>cp<CR>")

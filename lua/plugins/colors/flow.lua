@@ -5,11 +5,11 @@ return {
   opts = {
     theme = {
       style = "dark",         --  "dark" | "light"
-      contrast = "high",   -- "default" | "high"
+      contrast = "default",   -- "default" | "high"
       transparent = true,    -- true | false
     },
     colors = {
-      mode = "light",    -- "default" | "dark" | "light"
+      mode = "default",    -- "default" | "dark" | "light"
       fluo = "pink",       -- "pink" | "cyan" | "yellow" | "orange" | "green"
       custom = {
         saturation = "",   -- "" | string representing an integer between 0 and 100
