@@ -1,5 +1,6 @@
 local dart_config = require("plugins.lsp_configs.dart").dart_config
 local on_attach = require("plugins.lsp_configs.attach").on_attach
+local rust_settings = require("plugins.lsp_configs.rust_analyzer").settings
 
 local function setup_handlers()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -24,7 +25,7 @@ local function setup_handlers()
     on_attach = on_attach,
   })
 
-  require("lspconfig").ts_ls.setup({
+  vim.lsp.config("ts_ls", {
     settings = {
       javascript = {
         inlayHints = {
@@ -79,6 +80,13 @@ local function setup_handlers()
           }
         }
       }
+    },
+    capabilities = capabilities,
+    on_attach = on_attach
+  })
+  vim.lsp.config("rust_analyzer", {
+    settings = {
+      ['rust-analyzer'] = rust_settings,
     },
     capabilities = capabilities,
     on_attach = on_attach

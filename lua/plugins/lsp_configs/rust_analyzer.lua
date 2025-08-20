@@ -1,0 +1,213 @@
+local M = {
+  settings = {
+    -- → rust-analyzer.initializeStopped                   default: false
+    -- → rust-analyzer.restartServerOnConfigChange         default: false
+    -- → rust-analyzer.showDependenciesExplorer            default: true
+    -- → rust-analyzer.showRequestFailedErrorNotification  default: true
+    -- → rust-analyzer.showSyntaxTree                      default: false
+    -- → rust-analyzer.showUnlinkedFileNotification        default: true
+    -- → rust-analyzer.testExplorer                        default: false
+    -- → rust-analyzer.runnables.askBeforeUpdateTest  default: true
+    -- → rust-analyzer.runnables.extraEnv
+    -- → rust-analyzer.runnables.problemMatcher       default: ["$rustc"]
+    -- → rust-analyzer.statusBar.clickAction    default: "openLogs"
+    -- → rust-analyzer.statusBar.showStatusBar  default: {"documentSelector":[{"language":"rust"},{"pattern":"**/Cargo.toml"},{"pattern":"**/Cargo.lock"},{"pattern":"extension-output-rust-lang.rust-analyzer*","scheme":"output"}]}
+    -- → rust-analyzer.server.extraEnv
+    -- → rust-analyzer.server.path
+    -- → rust-analyzer.trace.extension  default: false
+    -- → rust-analyzer.trace.server     default: "off"
+    -- → rust-analyzer.debug.buildBeforeRestart  default: false
+    -- → rust-analyzer.debug.engine              default: "auto"
+    -- → rust-analyzer.debug.engineSettings      default: {}
+    -- → rust-analyzer.debug.sourceFileMap       default: {"/rustc/<id>":"${env:USERPROFILE}/.rustup/toolchains/<toolchain-id>/lib/rustlib/src/rust"}
+    -- → rust-analyzer.typing.continueCommentsOnNewline  default: true
+    -- → rust-analyzer.diagnostics.previewRustcOutput  default: false
+    -- → rust-analyzer.diagnostics.useRustcErrorCode   default: false
+    -- → rust-analyzer.assist.emitMustUse  default: false
+    -- → rust-analyzer.assist.expressionFillDefault  default: "todo"
+    -- → rust-analyzer.assist.preferSelf  default: false
+    -- → rust-analyzer.assist.termSearch.borrowcheck  default: true
+    -- → rust-analyzer.assist.termSearch.fuel  default: 1800
+    -- → rust-analyzer.cachePriming.enable  default: true
+    -- → rust-analyzer.cachePriming.numThreads  default: "physical"
+    -- → rust-analyzer.cargo.allTargets  default: true
+    -- → rust-analyzer.cargo.autoreload  default: true
+    -- → rust-analyzer.cargo.buildScripts.enable  default: true
+    -- → rust-analyzer.cargo.buildScripts.invocationStrategy  default: "per_workspace"
+    -- → rust-analyzer.cargo.buildScripts.overrideCommand
+    -- → rust-analyzer.cargo.buildScripts.rebuildOnSave  default: true
+    -- → rust-analyzer.cargo.buildScripts.useRustcWrapper  default: true
+    -- → rust-analyzer.cargo.cfgs  default: ["debug_assertions","miri"]
+    -- → rust-analyzer.cargo.extraArgs  default: []
+    -- → rust-analyzer.cargo.extraEnv  default: {}
+    -- → rust-analyzer.cargo.features  default: []
+    -- → rust-analyzer.cargo.noDefaultFeatures  default: false
+    -- → rust-analyzer.cargo.noDeps  default: false
+    -- → rust-analyzer.cargo.sysroot  default: "discover"
+    -- → rust-analyzer.cargo.sysrootSrc
+    -- → rust-analyzer.cargo.target
+    -- → rust-analyzer.cargo.targetDir
+    -- → rust-analyzer.cfg.setTest  default: true
+    -- → rust-analyzer.checkOnSave  default: true
+    -- → rust-analyzer.check.allTargets
+    -- → rust-analyzer.check.command  default: "check"
+    -- → rust-analyzer.check.extraArgs  default: []
+    -- → rust-analyzer.check.extraEnv  default: {}
+    -- → rust-analyzer.check.features
+    -- → rust-analyzer.check.ignore  default: []
+    -- → rust-analyzer.check.invocationStrategy  default: "per_workspace"
+    -- → rust-analyzer.check.noDefaultFeatures
+    -- → rust-analyzer.check.overrideCommand
+    -- → rust-analyzer.check.targets
+    -- → rust-analyzer.check.workspace  default: true
+    -- → rust-analyzer.completion.addSemicolonToUnit  default: true
+    -- → rust-analyzer.completion.autoAwait.enable  default: true
+    -- → rust-analyzer.completion.autoIter.enable  default: true
+    -- → rust-analyzer.completion.autoimport.enable  default: true
+    -- → rust-analyzer.completion.autoimport.exclude  default: [{"type":"methods","path":"core::borrow::Borrow"},{"type":"methods","path":"core::borrow::BorrowMut"}]
+    -- → rust-analyzer.completion.autoself.enable  default: true
+    -- → rust-analyzer.completion.callable.snippets  default: "fill_arguments"
+    -- → rust-analyzer.completion.excludeTraits  default: []
+    -- → rust-analyzer.completion.fullFunctionSignatures.enable  default: false
+    -- → rust-analyzer.completion.hideDeprecated  default: false
+    -- → rust-analyzer.completion.limit
+    -- → rust-analyzer.completion.postfix.enable  default: true
+    -- → rust-analyzer.completion.privateEditable.enable  default: false
+    -- → rust-analyzer.completion.snippets.custom  default: {"Rc::new":{"postfix":"rc","requires":"std::rc::Rc","scope":"expr","description":"Put the expression into an `Rc`","body":"Rc::new(${receiver})"},"Ok":{"scope":"expr","body":"Ok(${receiver})","postfix":"ok","description":"Wrap the expression in a `Result::Ok`"},"Box::pin":{"postfix":"pinbox","requires":"std::boxed::Box","scope":"expr","description":"Put the expression into a pinned `Box`","body":"Box::pin(${receiver})"},"Arc::new":{"postfix":"arc","requires":"std::sync::Arc","scope":"expr","description":"Put the expression into an `Arc`","body":"Arc::new(${receiver})"},"Some":{"scope":"expr","body":"Some(${receiver})","postfix":"some","description":"Wrap the expression in an `Option::Some`"},"Err":{"scope":"expr","body":"Err(${receiver})","postfix":"err","description":"Wrap the expression in a `Result::Err`"}}
+    -- → rust-analyzer.completion.termSearch.enable  default: false
+    -- → rust-analyzer.completion.termSearch.fuel  default: 1000
+    -- → rust-analyzer.diagnostics.disabled  default: []
+    -- → rust-analyzer.diagnostics.enable  default: true
+    -- → rust-analyzer.diagnostics.experimental.enable  default: false
+    -- → rust-analyzer.diagnostics.remapPrefix  default: {}
+    -- → rust-analyzer.diagnostics.styleLints.enable  default: false
+    -- → rust-analyzer.diagnostics.warningsAsHint  default: []
+    -- → rust-analyzer.diagnostics.warningsAsInfo  default: []
+    -- → rust-analyzer.files.exclude  default: []
+    -- → rust-analyzer.files.watcher  default: "client"
+    -- → rust-analyzer.highlightRelated.branchExitPoints.enable  default: true
+    -- → rust-analyzer.highlightRelated.breakPoints.enable  default: true
+    -- → rust-analyzer.highlightRelated.closureCaptures.enable  default: true
+    -- → rust-analyzer.highlightRelated.exitPoints.enable  default: true
+    -- → rust-analyzer.highlightRelated.references.enable  default: true
+    -- → rust-analyzer.highlightRelated.yieldPoints.enable  default: true
+    -- → rust-analyzer.hover.actions.debug.enable  default: true
+    -- → rust-analyzer.hover.actions.enable  default: true
+    -- → rust-analyzer.hover.actions.gotoTypeDef.enable  default: true
+    -- → rust-analyzer.hover.actions.implementations.enable  default: true
+    -- → rust-analyzer.hover.actions.references.enable  default: false
+    -- → rust-analyzer.hover.actions.run.enable  default: true
+    -- → rust-analyzer.hover.actions.updateTest.enable  default: true
+    -- → rust-analyzer.hover.documentation.enable  default: true
+    -- → rust-analyzer.hover.documentation.keywords.enable  default: true
+    -- → rust-analyzer.hover.dropGlue.enable  default: true
+    -- → rust-analyzer.hover.links.enable  default: true
+    -- → rust-analyzer.hover.maxSubstitutionLength  default: 20
+    -- → rust-analyzer.hover.memoryLayout.alignment  default: "hexadecimal"
+    -- → rust-analyzer.hover.memoryLayout.enable  default: true
+    -- → rust-analyzer.hover.memoryLayout.niches  default: false
+    -- → rust-analyzer.hover.memoryLayout.offset  default: "hexadecimal"
+    -- → rust-analyzer.hover.memoryLayout.padding
+    -- → rust-analyzer.hover.memoryLayout.size  default: "both"
+    -- → rust-analyzer.hover.show.enumVariants  default: 5
+    -- → rust-analyzer.hover.show.fields  default: 5
+    -- → rust-analyzer.hover.show.traitAssocItems
+    -- → rust-analyzer.imports.granularity.enforce  default: false
+    -- → rust-analyzer.imports.granularity.group  default: "crate"
+    -- → rust-analyzer.imports.group.enable  default: true
+    -- → rust-analyzer.imports.merge.glob  default: true
+    -- → rust-analyzer.imports.preferNoStd  default: false
+    -- → rust-analyzer.imports.preferPrelude  default: false
+    -- → rust-analyzer.imports.prefix  default: "crate"
+    -- → rust-analyzer.imports.prefixExternPrelude  default: false
+    --
+
+
+    inlayHints = {
+      -- bindingModeHints.enable                   --- default: false
+      -- chainingHints.enable                      --- default: true
+      -- closingBraceHints.enable                  --- default: true
+      -- closingBraceHints.minLines                --- default: 25
+      -- closureCaptureHints.enable                --- default: false
+      closureReturnTypeHints = { enable = "never" },     --- default: "never"
+      -- closureStyle                              --- default: "impl_fn"
+      -- discriminantHints.enable                  --- default: "never"
+      expressionAdjustmentHints = { enable = "always" },     --- default: "never"
+      -- expressionAdjustmentHints.hideOutsideUnsafe --- default: false
+      -- expressionAdjustmentHints.mode            --- default: "prefix"
+      -- genericParameterHints.const.enable        --- default: true
+      genericParameterHints = { lifetime = { enable = true } }     --- default: false
+      -- genericParameterHints.type.enable         --- default: false
+      -- implicitDrops.enable                      --- default: false
+      -- implicitSizedBoundHints.enable            --- default: false
+      -- lifetimeElisionHints.enable               --- default: "never"
+      -- lifetimeElisionHints.useParameterNames    --- default: false
+      -- maxLength                                 --- default: 25
+      -- parameterHints.enable                     --- default: true
+      -- rangeExclusiveHints.enable                --- default: false
+      -- reborrowHints.enable                      --- default: "never"
+      -- renderColons                              --- default: true
+      -- typeHints.enable                          --- default: true
+      -- typeHints.hideClosureInitialization       --- default: false
+      -- typeHints.hideClosureParameter            --- default: false
+      -- typeHints.hideNamedConstructor            --- default: false
+    }
+
+
+    --
+    --
+    --
+    -- → rust-analyzer.interpret.tests  default: false
+    -- → rust-analyzer.joinLines.joinAssignments  default: true
+    -- → rust-analyzer.joinLines.joinElseIf  default: true
+    -- → rust-analyzer.joinLines.removeTrailingComma  default: true
+    -- → rust-analyzer.joinLines.unwrapTrivialBlock  default: true
+    -- → rust-analyzer.lens.debug.enable  default: true
+    -- → rust-analyzer.lens.enable  default: true
+    -- → rust-analyzer.lens.implementations.enable  default: true
+    -- → rust-analyzer.lens.location  default: "above_name"
+    -- → rust-analyzer.lens.references.adt.enable  default: false
+    -- → rust-analyzer.lens.references.enumVariant.enable  default: false
+    -- → rust-analyzer.lens.references.method.enable  default: false
+    -- → rust-analyzer.lens.references.trait.enable  default: false
+    -- → rust-analyzer.lens.run.enable  default: true
+    -- → rust-analyzer.lens.updateTest.enable  default: true
+    -- → rust-analyzer.linkedProjects  default: []
+    -- → rust-analyzer.lru.capacity
+    -- → rust-analyzer.lru.query.capacities  default: {}
+    -- → rust-analyzer.notifications.cargoTomlNotFound  default: true
+    -- → rust-analyzer.numThreads
+    -- → rust-analyzer.procMacro.attributes.enable  default: true
+    -- → rust-analyzer.procMacro.enable  default: true
+    -- → rust-analyzer.procMacro.ignored  default: {}
+    -- → rust-analyzer.procMacro.server
+    -- → rust-analyzer.references.excludeImports  default: false
+    -- → rust-analyzer.references.excludeTests  default: false
+    -- → rust-analyzer.runnables.command
+    -- → rust-analyzer.runnables.extraArgs  default: []
+    -- → rust-analyzer.runnables.extraTestBinaryArgs  default: ["--show-output"]
+    -- → rust-analyzer.rustc.source
+    -- → rust-analyzer.rustfmt.extraArgs  default: []
+    -- → rust-analyzer.rustfmt.overrideCommand
+    -- → rust-analyzer.rustfmt.rangeFormatting.enable  default: false
+    -- → rust-analyzer.semanticHighlighting.doc.comment.inject.enable  default: true
+    -- → rust-analyzer.semanticHighlighting.nonStandardTokens  default: true
+    -- → rust-analyzer.semanticHighlighting.operator.enable  default: true
+    -- → rust-analyzer.semanticHighlighting.operator.specialization.enable  default: false
+    -- → rust-analyzer.semanticHighlighting.punctuation.enable  default: false
+    -- → rust-analyzer.semanticHighlighting.punctuation.separate.macro.bang  default: false
+    -- → rust-analyzer.semanticHighlighting.punctuation.specialization.enable  default: false
+    -- → rust-analyzer.semanticHighlighting.strings.enable  default: true
+    -- → rust-analyzer.signatureInfo.detail  default: "full"
+    -- → rust-analyzer.signatureInfo.documentation.enable  default: true
+    -- → rust-analyzer.typing.triggerChars  default: "=."
+    -- → rust-analyzer.vfs.extraIncludes  default: []
+    -- → rust-analyzer.workspace.discoverConfig
+    -- → rust-analyzer.workspace.symbol.search.excludeImports  default: false
+    -- → rust-analyzer.workspace.symbol.search.kind  default: "only_types"
+    -- → rust-analyzer.workspace.symbol.search.limit  default: 128
+    -- → rust-analyzer.workspace.symbol.search.scope  default: "workspace"
+
+  }
+}
+return M;
