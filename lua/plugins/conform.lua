@@ -68,6 +68,7 @@ local config = function()
       bash = { "beautysh" },
       prisma = { "prisma" },
       python = { "black" },
+      xml = { "xmlformatter" },
 
       javascript = standardJsOrDefault,
       javascriptreact = standardJsOrDefault,
