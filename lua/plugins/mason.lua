@@ -85,6 +85,11 @@ local function setup_handlers()
     on_attach = on_attach
   })
 
+  require("lspconfig").terraform_ls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach
+  })
+
   vim.lsp.config("rust_analyzer", {
     settings = {
       ['rust-analyzer'] = rust_settings,
