@@ -85,7 +85,7 @@ local function setup_handlers()
     on_attach = on_attach
   })
 
-  require("lspconfig").terraform_ls.setup({
+  vim.lsp.config("terraform_ls", {
     capabilities = capabilities,
     on_attach = on_attach
   })
