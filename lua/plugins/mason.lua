@@ -108,7 +108,12 @@ return {
     "mfussenegger/nvim-jdtls",
   },
   config = function()
-    require("mason").setup()
+    require("mason").setup({
+      ensure_installed = {
+        "js-debug-adapter",
+        "typescript-language-server"
+      }
+    })
     require("mason-lspconfig").setup()
     setup_handlers()
   end
