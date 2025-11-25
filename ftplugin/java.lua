@@ -1,8 +1,7 @@
-local mason = require 'mason-registry'
 local jdtls = require 'jdtls'
-local jdtls_path = mason.get_package('jdtls'):get_install_path()
-local java_debug_path = mason.get_package('java-debug-adapter'):get_install_path()
-local java_test_path = mason.get_package('java-test'):get_install_path()
+local jdtls_path = vim.fn.exepath('jdtls')
+local java_debug_path = vim.fn.exepath('java-debug-adapter')
+local java_test_path = vim.fn.exepath('java-test')
 
 local equinox_launcher_path = vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
 
@@ -18,7 +17,7 @@ local lombok_path = jdtls_path .. '/lombok.jar'
 
 local config = {
 	cmd = {
-		vim.fn.expand '/opt/homebrew/opt/openjdk@11/bin/java', -- or '/path/to/java17_or_newer/bin/java'
+		vim.fn.expand '/opt/homebrew/opt/openjdk@21/bin/java', -- or '/path/to/java17_or_newer/bin/java'
 
 		'-Declipse.application=org.eclipse.jdt.ls.core.id1',
 		'-Dosgi.bundles.defaultStartLevel=4',
