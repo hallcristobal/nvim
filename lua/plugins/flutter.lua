@@ -1,4 +1,4 @@
-local on_attach = require('plugins.lsp_configs.attach').on_attach;
+local on_attach = require("plugins.lsp_configs.attach").on_attach
 
 -- local function g(name, value)
 --   vim.api.nvim_set_var(name, value)
@@ -20,7 +20,6 @@ local on_attach = require('plugins.lsp_configs.attach').on_attach;
 -- g("flutter_use_last_attach_option", 1) -- Identical to g:flutter_use_last_run_option but affecting the :FlutterAttach command.
 -- g("flutter_close_on_quit", 0) -- Whether to close all __Flutter_Output__ windows (splits and tabs) on :FlutterQuit; defaults to 0.
 
-
 return {
   "nvim-flutter/flutter-tools.nvim",
   {
@@ -30,14 +29,14 @@ return {
       "nvim-lua/plenary.nvim",
       "stevearc/dressing.nvim", -- optional for vim.ui.select
     },
-    config = function()
-      require('flutter-tools').setup({
+    config = function ()
+      require("flutter-tools").setup({
         lsp = {
           on_attach = on_attach,
         },
         debugger = {
           enabled = false,
-          register_configurations = function(_)
+          register_configurations = function (_)
             -- require("dap").configurations.dart = {}
             -- require("dap.ext.vscode").load_launchjs()
           end,

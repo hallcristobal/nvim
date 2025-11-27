@@ -3,7 +3,7 @@ local js_languages = {
   "javascript",
   "typescriptreact",
   "javascriptreact",
-  "vue"
+  "vue",
 }
 return {
   "mfussenegger/nvim-dap",
@@ -38,19 +38,25 @@ return {
       event = "VeryLazy",
       dependencies = {
         "nvim-neotest/nvim-nio",
-        "mfussenegger/nvim-dap"
+        "mfussenegger/nvim-dap",
       },
-      config = function()
+      config = function ()
         local dap = require("dap")
         local dapui = require("dapui")
         require("dapui").setup()
-        dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-        dap.listeners.after.event_terminated["dapui_config"] = function() dapui.close() end
-        dap.listeners.after.event_exited["dapui_config"] = function() dapui.close() end
-      end
+        dap.listeners.after.event_initialized["dapui_config"] = function ()
+          dapui.open()
+        end
+        dap.listeners.after.event_terminated["dapui_config"] = function ()
+          dapui.close()
+        end
+        dap.listeners.after.event_exited["dapui_config"] = function ()
+          dapui.close()
+        end
+      end,
     },
   },
-  config = function()
+  config = function ()
     local dap = require("dap")
     require("nvim-dap-virtual-text").setup()
     ---
@@ -59,27 +65,26 @@ return {
     --- available yet and trigger errors.
     ---@param pkg string
     ---@param path? string
-    local function get_pkg_path(pkg, path)
-      pcall(require, 'mason')
-      local root = vim.env.MASON or (vim.fn.stdpath('data') .. '/mason')
-      path = path or ''
-      local ret = root .. '/packages/' .. pkg .. '/' .. path
+    local function get_pkg_path (pkg, path)
+      pcall(require, "mason")
+      local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
+      path = path or ""
+      local ret = root .. "/packages/" .. pkg .. "/" .. path
       return ret
     end
 
-    require('dap').adapters['pwa-node'] = {
-      type = 'server',
-      host = 'localhost',
-      port = '${port}',
+    require("dap").adapters["pwa-node"] = {
+      type = "server",
+      host = "localhost",
+      port = "${port}",
       executable = {
-        command = 'node',
+        command = "node",
         args = {
-          get_pkg_path('js-debug-adapter', '/js-debug/src/dapDebugServer.js'),
-          '${port}',
+          get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
+          "${port}",
         },
       },
     }
-
 
     for _, language in ipairs(js_languages) do
       dap.configurations[language] = {
@@ -89,7 +94,7 @@ return {
           name = "Launch file",
           program = "${file}",
           cwd = "${workspaceFolder}",
-          sourceMaps = true
+          sourceMaps = true,
         },
         {
           type = "pwa-node",
@@ -102,14 +107,13 @@ return {
         {
           name = "--------------------------------",
           type = "",
-          request = "launch"
-        }
+          request = "launch",
+        },
       }
     end
 
-
     vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
-    vim.keymap.set("n", "<leader>dr", function()
+    vim.keymap.set("n", "<leader>dr", function ()
       if vim.fn.filereadable(".vscode/launch.json") then
         local dap_vscode = require("dap.ext.vscode")
         dap_vscode.load_launchjs(nil, {
@@ -119,5 +123,5 @@ return {
       end
       dap.continue()
     end)
-  end
+  end,
 }

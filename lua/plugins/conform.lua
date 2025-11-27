@@ -8,7 +8,7 @@ local sdt_repos = {
   "nearside",
 }
 
-local function has_value(tab, val)
+local function has_value (tab, val)
   for index, value in ipairs(tab) do
     if value == val then
       return true
@@ -18,11 +18,11 @@ local function has_value(tab, val)
   return false
 end
 
-local config = function()
-  local conform = require('conform')
+local config = function ()
+  local conform = require("conform")
   local prettier_opt = { "prettierd", "prettier", stop_after_first = true }
 
-  local standardJsOrDefault = function(bufnr)
+  local standardJsOrDefault = function (bufnr)
     local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 
     if has_value(sdt_repos, cwd) then
@@ -42,7 +42,7 @@ local config = function()
     end
   end
 
-  local tsOrDefault = function()
+  local tsOrDefault = function ()
     local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 
     if cwd == "mediaplayer-solid" then
@@ -58,7 +58,6 @@ local config = function()
 
     return prettier_opt
   end
-
 
   conform.setup({
     formatters_by_ft = {
@@ -89,16 +88,18 @@ local config = function()
     notify_on_error = true,
   })
 
-  vim.keymap.set("n", "<leader>f", function()
+  vim.keymap.set("n", "<leader>f", function ()
     conform.format({
       async = true,
       lsp_fallback = true,
-      filter = function(client) return client.name ~= "ts_ls" end
+      filter = function (client)
+        return client.name ~= "ts_ls"
+      end,
     })
   end)
 end
 
 return {
-  'stevearc/conform.nvim',
-  config = config
+  "stevearc/conform.nvim",
+  config = config,
 }

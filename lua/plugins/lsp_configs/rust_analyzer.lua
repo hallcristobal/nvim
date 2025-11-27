@@ -122,21 +122,20 @@ local M = {
     -- → rust-analyzer.imports.prefixExternPrelude  default: false
     --
 
-
     inlayHints = {
       -- bindingModeHints.enable                   --- default: false
       -- chainingHints.enable                      --- default: true
       -- closingBraceHints.enable                  --- default: true
       -- closingBraceHints.minLines                --- default: 25
       -- closureCaptureHints.enable                --- default: false
-      closureReturnTypeHints = { enable = "never" },     --- default: "never"
+      closureReturnTypeHints = { enable = "never" }, --- default: "never"
       -- closureStyle                              --- default: "impl_fn"
       -- discriminantHints.enable                  --- default: "never"
-      expressionAdjustmentHints = { enable = "always" },     --- default: "never"
+      expressionAdjustmentHints = { enable = "always" }, --- default: "never"
       -- expressionAdjustmentHints.hideOutsideUnsafe --- default: false
       -- expressionAdjustmentHints.mode            --- default: "prefix"
       -- genericParameterHints.const.enable        --- default: true
-      genericParameterHints = { lifetime = { enable = true } }     --- default: false
+      genericParameterHints = { lifetime = { enable = true } }, --- default: false
       -- genericParameterHints.type.enable         --- default: false
       -- implicitDrops.enable                      --- default: false
       -- implicitSizedBoundHints.enable            --- default: false
@@ -151,8 +150,7 @@ local M = {
       -- typeHints.hideClosureInitialization       --- default: false
       -- typeHints.hideClosureParameter            --- default: false
       -- typeHints.hideNamedConstructor            --- default: false
-    }
-
+    },
 
     --
     --
@@ -207,7 +205,6 @@ local M = {
     -- → rust-analyzer.workspace.symbol.search.kind  default: "only_types"
     -- → rust-analyzer.workspace.symbol.search.limit  default: 128
     -- → rust-analyzer.workspace.symbol.search.scope  default: "workspace"
-
-  }
+  },
 }
-return M;
+return M

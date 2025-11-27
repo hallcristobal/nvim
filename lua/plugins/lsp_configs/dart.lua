@@ -1,15 +1,15 @@
-local utils = require('plugins.utils.utils')
+local utils = require("plugins.utils.utils")
 local M = {}
 --- Flutter stuff
-function M.on_attach(client, bufnr)
+function M.on_attach (client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 end
 
-function M.dart_config(on_attach)
+function M.dart_config (on_attach)
   return {
     cmd = { "dart", "language-server", "--protocol=lsp" },
     filetypes = { "dart" },
-    root_dir = utils.root_pattern 'pubspec.yaml',
+    root_dir = utils.root_pattern("pubspec.yaml"),
     init_options = {
       --- When set to true, workspace folders will be ignored and analysis will be performed based on the open files, as if no
       --- workspace was open at all. This allows opening large folders without causing them to be completely analyzed.
@@ -93,7 +93,7 @@ function M.dart_config(on_attach)
         -- includeDependenciesInWorkspaceSymbols
       },
     },
-    on_attach = function(client, bufnr)
+    on_attach = function (client, bufnr)
       on_attach(client, bufnr)
       M.on_attach(client, bufnr)
     end,

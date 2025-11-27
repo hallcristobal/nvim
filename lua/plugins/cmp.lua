@@ -1,4 +1,4 @@
-local config = function()
+local config = function ()
   local cmp = require("cmp")
   local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -8,7 +8,7 @@ local config = function()
       { name = "nvim_lsp" },
       { name = "nvim_lua" },
       { name = "luasnip", keyword_length = 2 },
-      { name = "buffer",  keyword_length = 3 },
+      { name = "buffer", keyword_length = 3 },
     },
     mapping = cmp.mapping.preset.insert({
       ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
@@ -20,17 +20,17 @@ local config = function()
 
   -- Providers
   local luasnip = require("luasnip")
-  vim.keymap.set({ "i" }, "<C-K>", function()
+  vim.keymap.set({ "i" }, "<C-K>", function ()
     luasnip.expand()
   end, { silent = true })
-  vim.keymap.set({ "i", "s" }, "<C-L>", function()
+  vim.keymap.set({ "i", "s" }, "<C-L>", function ()
     luasnip.jump(1)
   end, { silent = true })
-  vim.keymap.set({ "i", "s" }, "<C-H>", function()
+  vim.keymap.set({ "i", "s" }, "<C-H>", function ()
     luasnip.jump(-1)
   end, { silent = true })
 
-  vim.keymap.set({ "i", "s" }, "<C-E>", function()
+  vim.keymap.set({ "i", "s" }, "<C-E>", function ()
     if luasnip.choice_active() then
       luasnip.change_choice(1)
     end
@@ -48,7 +48,7 @@ local config = function()
 end
 
 return {
-  'hrsh7th/nvim-cmp',
+  "hrsh7th/nvim-cmp",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/nvim-cmp",
@@ -56,7 +56,7 @@ return {
       "L3MON4D3/LuaSnip",
       version = "v2.*",
       build = "make install_jsregexp",
-      lazy = true
+      lazy = true,
     },
     {
       "ray-x/lsp_signature.nvim",

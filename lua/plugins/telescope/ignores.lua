@@ -19,7 +19,7 @@ local xre_ignore = {
   "%code-coverage/",
   "%test/",
   "%target/",
-  ".DS_Store"
+  ".DS_Store",
 }
 local M = {
   ["graph-parser"] = {
@@ -81,7 +81,6 @@ local M = {
     "target/",
     "package%-lock%.json",
     "yarn.lock",
-
   },
   ["xre_parent"] = xre_ignore,
   ["xre_guide"] = xre_ignore,
@@ -110,7 +109,6 @@ local M = {
     "pnpm-lock.yaml",
     "tsconfig.json",
     "vite.config.js",
-
   },
   ["dart"] = {
     "coverage/",
@@ -144,13 +142,17 @@ local M = {
     "pubspec.lock",
     "pubspec.yaml",
   },
-  ["java"] = {}
+  ["java"] = {},
 }
-local function setDefault(t, d)
-  local mt = { __index = function() return d end }
+local function setDefault (t, d)
+  local mt = {
+    __index = function ()
+      return d
+    end,
+  }
   setmetatable(t, mt)
 end
 
 setDefault(M, {})
 
-return M;
+return M
