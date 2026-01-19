@@ -24,7 +24,6 @@ local function setup_handlers ()
     end,
   })
 
-  -- capabilities.textDocument.completion.completionItem.snippetSupport = true
   vim.lsp.config("cssls", {
     capabilities = capabilities,
     on_attach = on_attach,
@@ -71,7 +70,7 @@ local function setup_handlers ()
       "--compile-commands-dir=",
       "--function-arg-placeholders=0",
       "--enable-config",
-    }, -- custom build dir
+    },
     on_attach = on_attach,
   })
 
@@ -95,13 +94,13 @@ local function setup_handlers ()
     on_attach = on_attach,
   })
 
-  vim.lsp.config("rust_analyzer", {
-    settings = {
-      ["rust-analyzer"] = rust_settings,
-    },
-    capabilities = capabilities,
-    on_attach = on_attach,
-  })
+  -- vim.lsp.config("rust_analyzer", {
+  --   settings = {
+  --     ["rust-analyzer"] = rust_settings,
+  --   },
+  --   capabilities = capabilities,
+  --   on_attach = on_attach,
+  -- })
   vim.lsp.config("ansiblels", {
     capabilities = capabilities,
     on_attach = on_attach,
@@ -119,8 +118,17 @@ return {
   config = function ()
     require("mason").setup({
       ensure_installed = {
-        "js-debug-adapter",
+        -- Lua
+        "lua-language-server",
+        -- Rust
+        -- "rust-analyzer",
+        "codelldb",
+        -- C, CXX
+        "clangd",
+        "clang-format",
+        -- JS, TS
         "typescript-language-server",
+        "prettierd",
       },
     })
     require("mason-lspconfig").setup()

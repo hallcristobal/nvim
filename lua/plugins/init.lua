@@ -37,4 +37,23 @@ return {
   "alvan/vim-closetag",
   { import = "plugins.colors" },
   "nvim-tree/nvim-web-devicons",
+  {
+    "mrcjkb/rustaceanvim",
+    version = '^5',
+    lazy = false,
+    config = function ()
+      local extension_path = vim.fn.exepath("codelldb") .. "/extension/"
+      local c_path = extension_path .. "adapter/codelldb"
+      local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+      local cfg = require("rustaceanvim.config")
+      vim.g.rustaceanvim = {
+        server = {
+          on_attach = require("plugins.lsp_configs.attach").on_attach,
+        },
+        dap = {
+          adapter = cfg.get_codelldb_adapter(c_path, liblldb_path),
+        },
+      }
+    end,
+  },
 }

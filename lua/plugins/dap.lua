@@ -10,10 +10,10 @@ return {
   dependencies = {
     "theHamsta/nvim-dap-virtual-text",
     "williamboman/mason.nvim",
-    {
-      "microsoft/vscode-js-debug",
-      build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
-    },
+    -- {
+    --   "microsoft/vscode-js-debug",
+    --   build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+    -- },
     -- {
     --   "mxsdev/nvim-dap-vscode-js",
     --   config = function()
@@ -57,60 +57,60 @@ return {
     },
   },
   config = function ()
-    local dap = require("dap")
     require("nvim-dap-virtual-text").setup()
-    ---
-    --- Gets a path to a package in the Mason registry.
-    --- Prefer this to `get_package`, since the package might not always be
-    --- available yet and trigger errors.
-    ---@param pkg string
-    ---@param path? string
-    local function get_pkg_path (pkg, path)
-      pcall(require, "mason")
-      local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
-      path = path or ""
-      local ret = root .. "/packages/" .. pkg .. "/" .. path
-      return ret
-    end
+    --   ---
+    --   --- Gets a path to a package in the Mason registry.
+    --   --- Prefer this to `get_package`, since the package might not always be
+    --   --- available yet and trigger errors.
+    --   ---@param pkg string
+    --   ---@param path? string
+    --   local function get_pkg_path (pkg, path)
+    --     pcall(require, "mason")
+    --     local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
+    --     path = path or ""
+    --     local ret = root .. "/packages/" .. pkg .. "/" .. path
+    --     return ret
+    --   end
 
-    require("dap").adapters["pwa-node"] = {
-      type = "server",
-      host = "localhost",
-      port = "${port}",
-      executable = {
-        command = "node",
-        args = {
-          get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
-          "${port}",
-        },
-      },
-    }
+    --   require("dap").adapters["pwa-node"] = {
+    --     type = "server",
+    --     host = "localhost",
+    --     port = "${port}",
+    --     executable = {
+    --       command = "node",
+    --       args = {
+    --         get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
+    --         "${port}",
+    --       },
+    --     },
+    --   }
 
-    for _, language in ipairs(js_languages) do
-      dap.configurations[language] = {
-        {
-          type = "pwa-node",
-          request = "launch",
-          name = "Launch file",
-          program = "${file}",
-          cwd = "${workspaceFolder}",
-          sourceMaps = true,
-        },
-        {
-          type = "pwa-node",
-          request = "attach",
-          name = "Attach",
-          processId = require("dap.utils").pick_process,
-          cwd = "${workspaceFolder}",
-          sourceMaps = true,
-        },
-        {
-          name = "--------------------------------",
-          type = "",
-          request = "launch",
-        },
-      }
-    end
+    --   for _, language in ipairs(js_languages) do
+    --     dap.configurations[language] = {
+    --       {
+    --         type = "pwa-node",
+    --         request = "launch",
+    --         name = "Launch file",
+    --         program = "${file}",
+    --         cwd = "${workspaceFolder}",
+    --         sourceMaps = true,
+    --       },
+    --       {
+    --         type = "pwa-node",
+    --         request = "attach",
+    --         name = "Attach",
+    --         processId = require("dap.utils").pick_process,
+    --         cwd = "${workspaceFolder}",
+    --         sourceMaps = true,
+    --       },
+    --       {
+    --         name = "--------------------------------",
+    --         type = "",
+    --         request = "launch",
+    --       },
+    --     }
+    --   end
+    local dap = require("dap")
 
     vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
     vim.keymap.set("n", "<leader>dr", function ()
