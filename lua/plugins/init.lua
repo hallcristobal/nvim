@@ -42,7 +42,7 @@ return {
     version = '^5',
     lazy = false,
     config = function ()
-      local extension_path = vim.fn.exepath("codelldb") .. "/extension/"
+      local extension_path = vim.fn.exepath("codelldb") .. ""
       local c_path = extension_path .. "adapter/codelldb"
       local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
       local cfg = require("rustaceanvim.config")

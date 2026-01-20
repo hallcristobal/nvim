@@ -24,6 +24,31 @@ local function setup_handlers ()
     end,
   })
 
+  vim.lsp.config("lua_ls", {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+        hint = {
+          enable = true,
+        },
+        workspace = {
+          library = {
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+            [vim.fn.stdpath("config")] = true,
+            [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
+          },
+          maxPreload = 100000,
+          preloadFileSize = 10000,
+        },
+      },
+    },
+  })
+
   vim.lsp.config("cssls", {
     capabilities = capabilities,
     on_attach = on_attach,
@@ -114,6 +139,22 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
     "mfussenegger/nvim-jdtls",
+    {
+      "folke/lazydev.nvim",
+      ft = "lua", -- only load on lua files
+      opts = {
+        library = {
+          vim.fn.stdpath("config") .. "/lua",
+          "lazy.nvim",
+          -- See the configuration section for more details
+          -- Load luvit types when the `vim.uv` word is found
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+        enabled = function (_root_dir)
+          return vim.g.lazydev_enabled == nil and true or vim.g.lazydev_enabled
+        end,
+      },
+    },
   },
   config = function ()
     require("mason").setup({

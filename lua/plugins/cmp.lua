@@ -51,7 +51,16 @@ return {
   "hrsh7th/nvim-cmp",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/nvim-cmp",
+    {
+      "hrsh7th/nvim-cmp",
+      opts = function (_, opts)
+        opts.sources = opts.sources or {}
+        table.insert(opts.sources, {
+          name = "lazydev",
+          group_index = 0,
+        })
+      end
+    },
     {
       "L3MON4D3/LuaSnip",
       version = "v2.*",

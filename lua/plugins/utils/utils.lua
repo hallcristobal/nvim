@@ -36,10 +36,15 @@ function M.search_ancestors (startpath, func)
   end
 end
 
+---@param path string
+---@return string
 function M.escape_wildcards (path)
   return path:gsub("([%[%]%?%*])", "\\%1")
 end
 
+---Searches up the root tree to find a specific file
+---@param ... string
+---@return function(startpath: string)
 function M.root_pattern (...)
   local patterns = M.tbl_flatten({ ... })
   return function (startpath)
@@ -60,8 +65,16 @@ function M.root_pattern (...)
   end
 end
 
+---Checks if the given file is in the root tree
+---@param pattern string
+---@return boolean
 function M.is_in_tree (pattern)
   return M.root_pattern(pattern)() ~= nil
 end
 
+--- Returns the current Mason install directory
+--- @return string
+function M.MASON ()
+  return require("mason.settings").current.install_root_dir
+end
 return M
