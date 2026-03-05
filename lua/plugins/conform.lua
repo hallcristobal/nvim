@@ -64,9 +64,10 @@ local config = function ()
       lua = { "stylua" },
       json = { "jq", "prettierd", "prettier", stop_after_first = true },
       jsonc = { "prettierd", stop_after_first = true },
+      sh = { "beautysh" },
       bash = { "beautysh" },
       prisma = { "prisma" },
-      python = { "black" },
+      python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
       xml = { "xmlformatter" },
 
       javascript = standardJsOrDefault,

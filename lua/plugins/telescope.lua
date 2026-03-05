@@ -92,6 +92,14 @@ local config = function ()
       initial_mode = "normal",
     })
   end)
+  -- View Definitions
+  vim.keymap.set("n", "<leader>gi", function ()
+    builtin.lsp_implementations({
+      file_ignore_patterns = build_ignores(),
+      initial_mode = "normal",
+    })
+  end)
+
 
   -- View Buffers
   vim.keymap.set("n", "<leader>vb", function ()
