@@ -199,11 +199,29 @@ local M = {
     "pubspec.lock",
     "pubspec.yaml",
   },
-  ["java"] = {},
+  ["java"] = {
+    ".classpath",
+    ".devhub.yml",
+    ".git",
+    ".github",
+    ".gitignore",
+    ".project",
+    ".settings",
+    "bin",
+    "ci",
+    "src/test",
+    "Dockerfile",
+    "pom.xml",
+    "README.md",
+    "spotbugs-exclude.xml",
+    "startRedis.sh",
+    "stopRedis.sh",
+    "target",
+  },
 }
-local function setDefault (t, d)
+local function setDefault(t, d)
   local mt = {
-    __index = function ()
+    __index = function()
       return d
     end,
   }
