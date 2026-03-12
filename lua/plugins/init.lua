@@ -2,7 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function ()
+    config = function()
       local configs = require("nvim-treesitter.configs")
       configs.setup({
         sync_install = false,
@@ -16,13 +16,13 @@ return {
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = function ()
+    config = function()
       require("nvim-autopairs").setup({})
     end,
   },
   {
     "mbbill/undotree",
-    config = function ()
+    config = function()
       vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
       vim.opt.undofile = true
       vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
@@ -30,7 +30,7 @@ return {
   },
   {
     "tpope/vim-fugitive",
-    config = function ()
+    config = function()
       vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
     end,
   },
@@ -41,7 +41,7 @@ return {
     "mrcjkb/rustaceanvim",
     version = '^5',
     lazy = false,
-    config = function ()
+    config = function()
       local extension_path = vim.fn.exepath("codelldb") .. ""
       local c_path = extension_path .. "adapter/codelldb"
       local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
@@ -56,5 +56,9 @@ return {
       }
     end,
   },
+  -- {
+  --   "OXY2DEV/markview.nvim",
+  --   lazy = false,
+  -- }
   -- "github/copilot.vim"
 }

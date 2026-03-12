@@ -17,8 +17,8 @@ return {
       },
     },
     ui = {
-      borders = "inverse", -- "theme" | "inverse" | "fluo" | "none"
-      aggressive_spell = false, -- true | false
+      -- borders = "theme", -- "theme" | "inverse" | "fluo" | "none"
+      aggressive_spell = true, -- true | false
     },
   },
   config = function (_, opts)
