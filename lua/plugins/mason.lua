@@ -107,12 +107,12 @@ local function setup_handlers()
       }
     },
     capabilities = capabilities,
-    on_attach = function (client, bufnr)
+    on_attach = function(client, bufnr)
       my_on_attach(client, bufnr)
       if ruff_on_attach then
         ruff_on_attach(client, bufnr)
       end
-    end ,
+    end,
   })
 
   vim.lsp.config("pyright", {
@@ -128,23 +128,28 @@ local function setup_handlers()
         },
       },
     }
-  --   -- settings = {
-  --   --   pylsp = {
-  --   --     plugins = {
-  --   --       pycodestyle = {
-  --   --         ignore = { "E501", "E231", "E302" },
-  --   --         maxLineLength = 100,
-  --   --       },
-  --   --     },
-  --   --   },
-  --   -- },
-  --   capabilities = capabilities,
-  --   on_attach = function (client, bufnr)
-  --     on_attach(client, bufnr)
-  --   end ,
-})
+    --   -- settings = {
+    --   --   pylsp = {
+    --   --     plugins = {
+    --   --       pycodestyle = {
+    --   --         ignore = { "E501", "E231", "E302" },
+    --   --         maxLineLength = 100,
+    --   --       },
+    --   --     },
+    --   --   },
+    --   -- },
+    --   capabilities = capabilities,
+    --   on_attach = function (client, bufnr)
+    --     on_attach(client, bufnr)
+    --   end ,
+  })
 
   vim.lsp.config("terraform_ls", {
+    capabilities = capabilities,
+    on_attach = my_on_attach,
+  })
+
+  vim.lsp.config("rescriptls", {
     capabilities = capabilities,
     on_attach = my_on_attach,
   })
@@ -166,6 +171,11 @@ local function setup_handlers()
   vim.lsp.config('jdtls', {
     settings = {
       java = {
+        format = {
+          settings = {
+            url = "file://" .. vim.fn.getcwd() .. "/eclipse-formatter.xml",
+          },
+        },
         configuration = {
           runtimes = {
             {

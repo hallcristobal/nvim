@@ -60,5 +60,33 @@ return {
   --   "OXY2DEV/markview.nvim",
   --   lazy = false,
   -- }
-  -- "github/copilot.vim"
+  -- "github/copilot.vim",
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim", branch = "master" },
+    },
+    build = "make tiktoken",
+    config = function()
+      require("CopilotChat").setup({
+        model = "claude-opus-4.6",
+        context = { "buffers", "files" },
+        insert_at_end = true,
+        tools = { "copilot", "bash", "buffer", "clipboard",
+          "edit", "file", "gitdiff", "glob", "grep",
+          "selection", "url" },
+        trusted_tools = true,
+        mappings = {
+          reset = {
+            normal = "<C-x>",
+            insert = "",
+          },
+          complete = {
+            normal = "",
+            insert = "<C-l>",
+          }
+        },
+      })
+    end
+  }
 }
