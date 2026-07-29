@@ -35,7 +35,7 @@ function M.on_attach (client, bufnr)
   nmap("<leader>vrn", function ()
     vim.lsp.buf.rename()
   end)
-  nmap("<leader>L", function ()
+  nmap("<leader>ih", function ()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = nil }), { bufnr = nil })
   end)
 

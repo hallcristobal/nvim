@@ -47,3 +47,8 @@ vim.keymap.set("n", "<leader>cqq", "<cmd>call setqflist([])<CR>")
 
 vim.keymap.set("n", "<leader>.", "<cmd>tabnext<CR>")
 vim.keymap.set("n", "<leader>,", "<cmd>tabprev<CR>")
+
+-- Folding
+vim.keymap.set("n", "<leader>f", "za", { desc = "Toggle fold" })
+vim.keymap.set("n", "<leader>o", "zR", { desc = "Open all folds" })
+vim.keymap.set("n", "<leader>O", "zM", { desc = "Close all folds" })
