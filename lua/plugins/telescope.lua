@@ -108,14 +108,14 @@ local config = function ()
     })
   end)
 
-  vim.keymap.set("n", "<leader>fr", function ()
-    require("telescope").extensions.flutter.commands()
-  end)
+  -- vim.keymap.set("n", "<leader>fr", function ()
+  --   require("telescope").extensions.flutter.commands()
+  -- end)
 end
 
 return {
   "nvim-telescope/telescope.nvim",
-  tag = "0.1.8",
+  branch = "master",
   dependencies = { "nvim-lua/plenary.nvim" },
   config = config,
 }

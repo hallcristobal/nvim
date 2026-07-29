@@ -57,7 +57,5 @@ return {
         dotfiles = false,
       },
     })
-
-    vim.keymap.set("n", "<leader>ft", "<cmd>NvimTreeFocus<CR>")
   end,
 }
