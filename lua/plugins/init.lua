@@ -124,5 +124,48 @@ return {
       })
       vim.keymap.set({ "n", "s", "v" }, "<leader>l", copilotChat.toggle)
     end
+  },
+  {
+    'mfussenegger/nvim-lint',
+    config = function()
+      local lint = require('lint')
+
+      lint.linters['composite-action-lint'] = {
+        cmd = os.getenv("HOME") .. '/go/bin/composite-action-lint',
+        stdin = false,
+        ignore_exitcode = true,
+        parser = function(output, _)
+          local diagnostics = {}
+          for line in output:gmatch('[^\n]+') do
+            local file, row, col, msg = line:match('^([^:]+):(%d+):(%d+): (.+)$')
+            if file then
+              table.insert(diagnostics, {
+                lnum = tonumber(row) - 1,
+                col = tonumber(col) - 1,
+                message = msg,
+                severity = vim.diagnostic.severity.WARN,
+              })
+            end
+          end
+          return diagnostics
+        end,
+      }
+
+      lint.linters_by_ft = {
+        yaml = { 'actionlint', 'composite-action-lint' }
+      }
+
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+        pattern = "*.yml,*.yaml",
+        callback = function()
+          local path = vim.api.nvim_buf_get_name(0)
+          if path:match("%.github/workflows/") then
+            lint.try_lint('actionlint')
+          elseif path:match("%.github/actions/") then
+            lint.try_lint('composite-action-lint')
+          end
+        end,
+      })
+    end
   }
 }

@@ -195,6 +195,10 @@ local function setup_handlers()
       my_on_attach(client, bufnr);
     end,
   })
+  vim.lsp.config('gh_actions_ls', {
+    capabilities = capabilities,
+    on_attach = my_on_attach,
+  })
 end
 
 return {

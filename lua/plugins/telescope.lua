@@ -39,6 +39,7 @@ local config = function ()
     builtin.find_files({
       search_dirs = { "src/" },
       file_ignore_patterns = build_ignores(),
+      hidden = true,
     })
   end, {})
 
@@ -46,6 +47,7 @@ local config = function ()
   vim.keymap.set("n", "<leader>pf", function ()
     builtin.find_files({
       file_ignore_patterns = build_ignores(),
+      hidden = true,
     })
   end, {})
 
@@ -53,6 +55,7 @@ local config = function ()
   vim.keymap.set("n", "<leader>Pf", function ()
     builtin.find_files({
       file_ignore_patterns = {},
+      hidden = true,
     })
   end, {})
 
@@ -60,6 +63,7 @@ local config = function ()
   vim.keymap.set("n", "<C-p>", function ()
     builtin.git_files({
       file_ignore_patterns = build_ignores(),
+      hidden = true,
     })
   end, {})
 
@@ -67,13 +71,15 @@ local config = function ()
   vim.keymap.set("n", "<leader>ps", function ()
     builtin.live_grep({
       file_ignore_patterns = build_ignores(),
+      hidden = true,
     })
   end)
 
   -- Grep search w/o ignore
   vim.keymap.set("n", "<leader>Ps", function ()
     builtin.live_grep({
-      file_ignore_patterns = build_ignores(),
+      file_ignore_patterns = {},
+      hidden = true,
     })
   end)
 
@@ -82,6 +88,7 @@ local config = function ()
     builtin.lsp_references({
       file_ignore_patterns = build_ignores(),
       initial_mode = "normal",
+      hidden = true,
     })
   end)
 
@@ -90,6 +97,7 @@ local config = function ()
     builtin.lsp_definitions({
       file_ignore_patterns = build_ignores(),
       initial_mode = "normal",
+      hidden = true,
     })
   end)
   -- View Definitions
@@ -97,6 +105,7 @@ local config = function ()
     builtin.lsp_implementations({
       file_ignore_patterns = build_ignores(),
       initial_mode = "normal",
+      hidden = true,
     })
   end)
 
@@ -105,6 +114,7 @@ local config = function ()
   vim.keymap.set("n", "<leader>vb", function ()
     builtin.buffers({
       initial_mode = "normal",
+      hidden = true,
     })
   end)
 
