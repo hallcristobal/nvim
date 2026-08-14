@@ -14,7 +14,6 @@ return {
         "html",
         "javascript",
         "json",
-        "jsonc",
         "lua",
         "luadoc",
         "markdown",
@@ -38,13 +37,10 @@ return {
       -- Highlighting + indentation (injections are handled natively, no setup).
       vim.api.nvim_create_autocmd("FileType", {
         callback = function()
-          -- highlight = { enable = true }
           pcall(vim.treesitter.start)
-          -- indent = { enable = true } (experimental on main)
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          -- treesitter-based folding
-          vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
-          vim.wo[0][0].foldmethod = "expr"
+          -- vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          -- vim.wo[0][0].foldmethod = "expr"
         end,
       })
     end,
@@ -106,7 +102,7 @@ return {
     config = function()
       local copilotChat = require("CopilotChat")
       copilotChat.setup({
-        model = "claude-opus-4.6",
+        model = "claude-sonnet-4.6",
         resources = { "selection", "buffer" },
         insert_at_end = true,
         allow_insecure = true,
@@ -122,7 +118,7 @@ return {
           }
         },
       })
-      vim.keymap.set({ "n", "s", "v" }, "<leader>l", copilotChat.toggle)
+      vim.keymap.set({ "n", "s", "v" }, "<leader>cc", copilotChat.toggle)
     end
   },
   {
