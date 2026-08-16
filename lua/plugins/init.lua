@@ -71,7 +71,7 @@ return {
   "nvim-tree/nvim-web-devicons",
   {
     "mrcjkb/rustaceanvim",
-    version = '^5',
+    version = '*',
     lazy = false,
     config = function()
       local extension_path = vim.fn.exepath("codelldb") .. ""
